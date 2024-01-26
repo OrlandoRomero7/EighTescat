@@ -1,0 +1,23 @@
+﻿@inherits LayoutComponentBase
+
+
+<div class="controls-container">
+ <UserHomePageControls ></UserHomePageControls>
+
+</div>
+
+
+<div style="transform: translateY(0);">
+    @ChildContent
+</div>
+
+
+
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = default!;
+}
+
+
+

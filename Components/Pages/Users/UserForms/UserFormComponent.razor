@@ -1,0 +1,132 @@
+﻿
+<EditForm Model="@completeUserData" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+
+
+
+    @if (User is not null)
+    {
+        <FormSection Title="Informacion Basica">
+            <UserFields User="@User" DepartmentsList="@DepartmentsList" OfficeList="@OfficeList" AreasList="@AreasList" />
+        </FormSection>
+    }
+
+
+    @if (Emails is not null)
+    {
+        <FormSection Title="Emails">
+         
+            <EmailFields Emails="Emails"  />
+
+        </FormSection>
+    }
+
+
+    @if (Credentials is not null)
+    {
+        <FormSection Title="Credenciales">
+            <CredentialsFields Credentials="@Credentials" />
+        </FormSection>
+    }
+
+
+    <div class="mt-3">
+        @if (IsEdit)
+        {
+            <button type="submit" class="btn btn-primary" disabled="@IsBusy">Actualizar</button>
+            <button type="submit" class="btn btn-outline-danger" @onclick="(() => OnDelete.InvokeAsync(User))" disabled="@IsBusy">Eliminar</button>
+            <button type="button" class="btn btn-secondary" @onclick="HandleCancel" disabled="@IsBusy">Cancelar</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary" disabled="@IsBusy">Agregar Usuario</button>
+        }
+    </div>
+
+
+</EditForm>
+
+
+
+
+@code {
+    [Parameter]
+    public bool IsBusy { get; set; }
+
+    [Parameter]
+    public bool IsEdit { get; set; }
+
+
+    [Parameter]
+    public User? User { get; set; }
+
+    [Parameter]
+    public UserCredentials? Credentials { get; set; }
+
+    [Parameter]
+    public UserEmails? Emails { get; set; }
+
+    private CompleteUserData completeUserData = new CompleteUserData();
+
+
+    [Parameter]
+    public string[]? DepartmentsList { get; set; }
+    [Parameter]
+    public string[]? OfficeList { get; set; }
+    [Parameter]
+    public string[]? AreasList { get; set; }
+
+
+
+
+    [Parameter]
+    public EventCallback<bool> OnSubmit { get; set; }
+
+    [Parameter]
+    public EventCallback<User> OnDelete { get; set; }
+
+
+    [Parameter]
+    public EventCallback<bool> OnCancel { get; set; }
+
+
+
+
+
+    protected override void OnInitialized()
+    {
+        // Populate completeUserData instance
+        completeUserData.User = User;
+        completeUserData.Credentials = Credentials;
+        completeUserData.Emails = Emails;
+
+    }
+
+
+    private async Task HandleValidSubmit()
+    {
+         
+        if (OnSubmit.HasDelegate)
+        {
+            await OnSubmit.InvokeAsync(true);
+        }
+
+    }
+
+
+    private async Task HandleInvalidSubmit()
+    {
+        if (OnSubmit.HasDelegate)
+        {
+            await OnSubmit.InvokeAsync(false);
+        }
+    }
+
+    private async Task HandleCancel()
+    {
+        if (OnCancel.HasDelegate)
+        {
+            await OnCancel.InvokeAsync();
+        }
+
+    }
+}

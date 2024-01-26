@@ -1,0 +1,22 @@
+﻿@using System.Net.Http
+@using System.Reflection;
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.JSInterop
+@using TescatGlobalServer
+@using TescatGlobalServer.Components
+@using TescatGlobalServer.Data
+@using TescatGlobalServer.Data.Models
+@using TescatGlobalServer.Components.Pages
+@using TescatGlobalServer.Components.Pages.Users
+@using TescatGlobalServer.Components.Pages.Users.UserPageControls
+@using TescatGlobalServer.Components.Pages.Users.UserDetails
+@using TescatGlobalServer.Components.Pages.Users.UserForms
+@inject NavigationManager NavigationManager
+@inject IDbContextFactory<MainDbContext> ContextFactory

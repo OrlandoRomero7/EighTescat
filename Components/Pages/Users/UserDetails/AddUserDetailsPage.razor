@@ -1,0 +1,234 @@
+﻿@page "/users/add/{UserID:int}"
+
+
+
+<PageTitle>Crear Nuevo Usuario</PageTitle>
+
+@if (UserAlreadyExists)
+{
+
+    <div class="alert alert-primary ">El Usuario Con Numero De Empleado: @UserID. <br> Ya Existe.</div>
+
+    <div>
+        <h3>
+            ¿Quiere editar al usuario?
+        </h3>
+        <button class="btn btn-info" @onclick="EditUserPage">
+            Editar
+        </button>
+        <button class="btn btn-info" @onclick="ReturnToAddUsersHome">
+            Regresar
+        </button>
+    </div>
+
+}
+else
+{
+@*    <h3>Agregar</h3>*@
+    <UserFormComponent IsBusy="@IsBusy" User="@User" Credentials="@Credentials" Emails="@Emails" 
+                       DepartmentsList="@DepartmentsList" OfficeList="@OfficeList" AreasList="@AreasList" OnSubmit="@HandleSubmit" OnCancel="ReturnToAddUsersHome" />
+}
+
+@if (SuccessMessage is not null)
+{
+    <br />
+    <div class="alert alert-success">@SuccessMessage</div>
+}
+
+@if (ErrorMessage is not null)
+{
+    <br />
+    <div class="alert alert-danger">@ErrorMessage</div>
+}
+
+
+
+@code {
+    private User? User { get; set; }
+    private UserCredentials? Credentials { get; set; } 
+    private UserEmails? Emails { get; set; }
+    
+
+
+    public bool IsBusy { get; set; }
+
+    private bool UserAlreadyExists { get; set; }
+
+    private string[]? DepartmentsList { get; set; }
+    private string[]? OfficeList { get; set; }
+    private string[]? AreasList { get; set; }
+
+
+    private string? SuccessMessage { get; set; }
+    private string? ErrorMessage { get; set; }
+
+    [Parameter]
+    public int? UserID { get; set; }
+
+
+
+    protected override async
+    Task OnInitializedAsync()
+    {
+        using var context = ContextFactory.CreateDbContext();
+
+        UserAlreadyExists = await context.Users.AnyAsync(u => u.ID_USER == UserID);
+
+        //User Department Selector
+        var Departments = await context.Users.OrderBy(dept => dept.DEPT).ToArrayAsync();
+
+        DepartmentsList = Departments.Where(u => u.DEPT != null).Select(u => u.DEPT!).Distinct().ToArray();
+
+        //User Office Selector
+        var Offices = await context.Users.OrderBy(office => office.OFFICE).ToArrayAsync();
+
+        OfficeList = Offices.Where(u => u.OFFICE != null).Select(u => u.OFFICE!).Distinct().ToArray();
+
+        //User Area Selector
+
+        var Area = await context.Users.OrderBy(area => area.AREA).ToArrayAsync();
+
+        AreasList = Area.Where(u => u.AREA != null).Select(u => u.AREA!).Distinct().ToArray();
+
+
+        if (!UserAlreadyExists)
+        {
+
+            User = new();
+
+            Credentials = new();
+
+            Emails = new();
+
+
+            //For new Users
+            if (UserID.HasValue)
+            {
+               User.ID_USER = UserID.Value;
+
+            }
+
+        }
+    }
+
+
+
+    private async Task<User> InsertUser(User newUser, UserCredentials credentials, UserEmails emails)
+    {
+        if (newUser == null) throw new ArgumentNullException(nameof(newUser));
+        if (credentials == null) throw new ArgumentNullException(nameof(credentials));
+        if (emails == null) throw new ArgumentNullException(nameof(emails));
+       
+        using var context = ContextFactory.CreateDbContext();
+
+        using var transaction = await context.Database.BeginTransactionAsync();
+
+        context.Users.Add(newUser);
+        await context.SaveChangesAsync();
+
+        context.User_Credentials.Add(credentials);
+        await context.SaveChangesAsync();
+
+        context.Emails.Add(emails);
+        await context.SaveChangesAsync();
+
+     
+        await transaction.CommitAsync();
+        return newUser;
+    }
+
+
+
+    private async Task HandleValidSubmit()
+    {
+        if (IsBusy)
+        {
+            return;
+        }
+
+
+        IsBusy = true;
+
+        try
+        {
+            if (User is not null && Credentials is not null && Emails is not null )
+            {
+                // Aqui mandamos los ID para el nuevo usuario
+                Credentials.ID_USER = User.ID_USER;
+                Emails.ID_USER = User.ID_USER;
+               
+
+                UserID = User.ID_USER;  
+                await InsertUser(User, Credentials, Emails);
+             
+                
+
+                ErrorMessage = null;
+                SuccessMessage = $"El usuario {User.NAME} se registro correctamente.";
+               
+
+                User = new();
+
+                Credentials = new();
+
+                Emails = new();
+
+              
+                EditUserPage();
+            }
+
+        }
+        catch (DbUpdateException)
+        {
+            SuccessMessage = null;
+            ErrorMessage = $"El usuario numero: {User?.ID_USER}. Ya existe.";
+        }
+
+        catch (Exception ex)
+        {
+            SuccessMessage = null;
+            ErrorMessage = $"Hubo un error al registrar al usuario: {ex.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+
+    }
+
+
+    private void HandleInvalidSubmit()
+    {
+        SuccessMessage = null;
+        ErrorMessage = null;
+    }
+
+
+    private async Task HandleSubmit(bool isValid)
+    {
+        if (isValid)
+        {
+            await HandleValidSubmit();
+        }
+        else
+        {
+            HandleInvalidSubmit();
+        }
+    }
+
+
+    protected void EditUserPage()
+    {
+        NavigationManager.NavigateTo("/users/details/" + UserID);
+    }
+    protected void ReturnToAddUsersHome()
+    {
+        NavigationManager.NavigateTo("/users/add/");
+    }
+
+
+}
+
+
+
+

@@ -1,0 +1,221 @@
+﻿@page "/users"
+@page "/users/{SearchTerm}"
+@page "/users/{SearchTerm}/office/{UserOffice}/entrydate/{UserLength:int}"
+
+
+<PageTitle>Usuarios - Project Tescatlipoca</PageTitle>
+
+<UserHomePageLayout>
+    <h1>Usuarios</h1>
+
+
+
+    @if (Users == null)
+    {
+        <p>Cargando usuarios...</p>
+    }
+    else if (!Users.Any())
+    {
+        <p>No se han encontrado usuarios ☹️</p>
+    }
+    else
+    {
+
+
+        <div style="row-gap: 4rem; justify-content: center; display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top:2.5rem">
+
+            @foreach (var user in Users)
+            {
+
+                <UserCard User="user" />
+
+            }
+
+        </div>
+
+    }
+
+</UserHomePageLayout>
+
+
+@code {
+    private User[]? Users { get; set; }
+    private User[]? _cachedUsers { get; set; } = Array.Empty<User>();
+
+
+    [Parameter]
+    public string
+    SearchTerm
+    { get; set; } = default!;
+
+    [Parameter, SupplyParameterFromQuery]
+    public string?
+    UserOffice
+    { get; set; }
+
+    [Parameter, SupplyParameterFromQuery]
+    public int?
+    UserLength
+    { get; set; }
+
+
+
+    protected override async
+    Task OnParametersSetAsync() => await DisplayCards();
+
+
+    protected override async
+    Task OnInitializedAsync() => await DisplayCards();
+
+
+    private async Task DisplayCards()
+    {
+
+        try
+        {
+            using var context = ContextFactory.CreateDbContext();
+
+            await GetAllUSers(context);
+
+            if (SearchTerm is not null)
+            {
+                await UpdateSearch(context);
+            }
+            if (UserOffice is not null || UserLength is not null)
+            {
+                UpdateFilters();
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hubo un problema al cargar la informacion de los usuarios{ex.Message}");
+        }
+    }
+
+
+    private async
+    Task GetAllUSers(MainDbContext context) => Users = await context.Users.ToArrayAsync();
+
+
+
+    private async
+    Task UpdateSearch(MainDbContext context)
+    {
+
+        if (!string.IsNullOrEmpty(SearchTerm))
+        {
+            var searchTermLower = SearchTerm.ToLower();
+
+
+            var query = context.Users
+            .Where
+                (
+                x =>
+
+                x.NAME.ToLower()
+                .Contains
+                (searchTermLower) ||
+
+                x.POSITION.ToLower()
+                .Contains
+                (searchTermLower) ||
+
+                x.DEPT.ToLower()
+                .Contains
+                (searchTermLower) ||
+
+                x.CEL.ToString()
+                .Contains
+                (searchTermLower) ||
+
+                x.TEL.ToString()
+                .Contains
+                (searchTermLower)
+
+            );
+
+            Users = await query.ToArrayAsync();
+        }
+        else
+        {
+            Users = null;
+        }
+
+        _cachedUsers = Users;
+        StateHasChanged();
+
+    }
+
+
+    private void
+    UpdateFilters()
+    {
+
+        @*    if (Users == null)
+        {
+            Users = _cachedUsers;
+        }*@
+
+        var filters = new List<Func<User, bool>>();
+
+        if (!string.IsNullOrEmpty(UserOffice))
+        {
+            filters.Add(x =>
+              x.OFFICE?.Contains(UserOffice, StringComparison.CurrentCultureIgnoreCase) == true);
+        }
+
+
+
+        if (UserLength.HasValue)
+        {
+            var currentDate = DateTime.Now;
+
+            // Add a filter based on the NON_NULL_ENTRY_DATE.
+            if (UserLength.Value >= 0)
+            {
+                filters.Add(x =>
+                {
+                    // Check if NON_NULL_ENTRY_DATE is at its default value
+                    if (x.NON_NULL_ENTRY_DATE == DateTime.MinValue)
+                    {
+                        return false;
+                    }
+
+                    return (currentDate - x.NON_NULL_ENTRY_DATE).TotalDays / 365.25 > UserLength.Value;
+                });
+            }
+            else
+            {
+                filters.Add(x =>
+                {
+                    // Check if NON_NULL_ENTRY_DATE is at its default value
+                    if (x.NON_NULL_ENTRY_DATE == DateTime.MinValue)
+                    {
+                        return false; // or handle accordingly
+                    }
+
+                    return (currentDate - x.NON_NULL_ENTRY_DATE).TotalDays / 365.25 < Math.Abs(UserLength.Value);
+                });
+            }
+        }
+
+
+
+        if (filters.Any())
+        {
+            Users = Users?.Where(user => filters.All(filter => filter(user))).ToArray();
+        }
+        else
+        {
+            Users = _cachedUsers;
+        }
+
+
+        StateHasChanged();
+
+    }
+
+
+}

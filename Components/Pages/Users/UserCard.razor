@@ -1,0 +1,150 @@
+﻿
+
+
+
+
+<div class="user-card" style=" margin: 10px;">
+    <div class="card shadow" style=" border-radius: 12px; border:0px; overflow:hidden; height:100%">
+        <div class="card-body" style="padding: 0px;">
+            <center class="m-t-30">
+
+                <div class="profile-img">
+
+                    @if (User.IMAGE_NAME is not null)
+                    {
+                        <img id="userImage"
+                             src="/Images/@User.IMAGE_NAME"
+                             alt="@User.NAME"
+                             style="width: 100%; object-fit: cover; object-position: center 33%; @defaultImageStyle"
+                            @onerror="OnImageError" />
+                    }
+                    else
+                    {
+                        <img src="/Images/default.svg"
+                             alt="user image"
+                             style="width: 90%; object-fit: cover; object-position: center 26%;" />
+                    }
+
+
+                </div>
+
+            </center>
+        </div>
+
+        @if (_CardBodyContent != "")
+        {
+            <div style="position: absolute; display:flex; width:100%; justify-content:center; bottom:5.5rem; z-index:3">
+                <button class="btn btn-outline-primary" style=" font-size:1.25rem; border-radius:6px" @onclick="() => UserDetails(User.ID_USER)">
+                    Completar Información
+                </button>
+            </div>
+        }
+
+
+        <div class="@_CardBodyContent">
+
+
+            <div class="card-body ">
+                <h5 class="card-title m-t-10">@User.NAME</h5>
+
+                <div style="display:flex; align-content:center">
+                    <small class="text-details material-symbols-outlined me-1" style="font-size:20px">
+                        work
+                    </small>
+                    <h6>
+                        @User.POSITION
+                    </h6>
+                </div>
+            </div>
+
+            <div class="card-body pt-0 pb-0">
+                <div style="display:flex; justify-content:space-between">
+                    <div>
+                        <small class="text-details bi bi-telephone"></small>
+                        <h4>@User.TEL</h4>
+                    </div>
+                    <div>
+                        <small class="text-details p-t-30 db bi bi-building"></small>
+                        <h4>@User.DEPT</h4>
+                    </div>
+                </div>
+
+            </div>
+
+
+            @*buttons*@
+            <div style="text-align:left" class="card-body">
+
+
+                <button class="btn btn-primary bi bi-binoculars me-2" @onclick="() => UserDetails(User.ID_USER)">
+                </button>
+
+                <button class="btn btn-outline-primary bi bi-info-circle-fill">
+                </button>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter, EditorRequired]
+    public User User
+    { get; set; } = default!;
+
+    string? _CardBodyContent;
+
+    string? defaultImageStyle;
+
+
+    protected override void
+    OnInitialized()
+    {
+        CardBodyContentBlur();
+      
+    }
+
+
+
+    private void OnImageError()
+    {
+        User.IMAGE_NAME = "default.svg"; 
+        defaultImageStyle = "width: 90%; object-fit: cover; object-position: center 26%;";
+    }
+
+    protected void UserDetails(int id)
+    {
+        NavigationManager.NavigateTo("/users/details/" + id);
+    }
+
+
+    protected void CardBodyContentBlur()
+    {
+        if (User.NAME is null || User.POSITION is null || !User.TEL.HasValue || User.DEPT is null)
+        {
+            _CardBodyContent = "card-body-content-incomplete";
+        }
+        else
+        {
+            _CardBodyContent = "";
+        }
+
+    }
+
+    protected override void OnParametersSet()
+    {
+        CardBodyContentBlur();
+
+    }
+
+}

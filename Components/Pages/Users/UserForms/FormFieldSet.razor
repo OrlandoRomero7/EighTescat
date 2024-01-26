@@ -1,0 +1,19 @@
+﻿
+<div class="@Width">
+    <label for="@Label" class="form-label">@Label</label>
+    @ChildContent
+</div>
+
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    [Parameter]
+    public string Width { get; set; } = "col";
+
+    [Parameter, EditorRequired]
+    public string Label { get; set; } = " ";
+
+
+}

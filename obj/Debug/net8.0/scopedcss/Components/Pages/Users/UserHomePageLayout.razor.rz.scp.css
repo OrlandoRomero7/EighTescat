@@ -1,0 +1,12 @@
+.controls-container[b-5vifhrzakp] {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    margin-top: -2.5%;
+}
+
+@media (min-width: 2000px) {
+    .controls-container[b-5vifhrzakp] {
+        margin-top: -2%;
+    }
+}

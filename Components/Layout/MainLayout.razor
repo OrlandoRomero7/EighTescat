@@ -1,0 +1,199 @@
+﻿@using System.Text.RegularExpressions
+@inherits LayoutComponentBase
+@* @inject IJSRuntime JSRuntime *@
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+<PageTitle>Tescat Software</PageTitle>
+<CascadingAuthenticationState>
+    <div class="page">
+
+        <span class="@ActiveSideBarStyles active-sidebar-toggle material-symbols-outlined ms-3" @onclick="ToggleActiveSideBarStyles">
+            @SideBarIcon
+        </span>
+
+        @if (!ActiveToggle)
+        {
+            <span class="@ActiveSideBarStyles active-sidebar-toggle material-symbols-outlined ms-3 mt-5" @onclick="LockSideBarToggle">
+                @LockBarIcon
+
+            </span>
+        }
+
+        <div id="top" class="header-container" style="position:absolute; top:0; left:0; right:0; margin:auto; width:1px">
+        </div>
+
+        <div class="@ActiveSideBarStyles sidebar" @onmouseover="ApplyActiveSideBarStyles " @onmouseout="ApplyActiveSideBarStyles ">
+            <NavMenu ActiveSideBarStyles="@ActiveSideBarStyles" />
+        </div>
+
+
+
+        @*   <MainHeader />*@
+
+
+
+
+
+
+        <MainModal @ref="showingModal" DeletingUser="OnDeletingUser"></MainModal>
+
+
+        <CascadingValue Value="showingModal">
+            <main class="container mb-5 @PageTransition" style="max-width:100%; margin-top:5.5rem">
+
+                @Body
+
+
+            </main>
+        </CascadingValue>
+
+
+        <button class="scroll-to-top-button shadow" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">
+            <i style="font-size:1.5rem" class="bi bi-arrow-up-short"></i>
+        </button>
+
+    </div>
+</CascadingAuthenticationState>
+
+
+
+
+
+@code {
+    public string ActiveSideBarStyles { get; private set; } = "sidebar-active";
+    public bool ActiveToggle { get; private set; } = true;
+    public string SideBarIcon { get; private set; } = "menu_open";
+    public string LockBarIcon { get; private set; } = "lock_open";
+    public bool ActiveToggleLock { get; private set; } = false;
+
+    public string? PageTransition { get; set; }
+
+    private bool firstRender = true;
+
+
+    MainModal? showingModal;
+    private string? modalLocationValue;
+
+    
+    private async Task CheckAuthenticationStateAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+
+        // string currentUrl = NavigationManager.Uri;
+        bool isUserRoute = false;
+        // isUserRoute = System.Text.RegularExpressions.Regex.IsMatch(currentUrl, @"/pcDetails/[a-fA-F0-9-]+");
+
+        //var isInUsersRoute = NavigationManager.Uri.EndsWith("/users", StringComparison.OrdinalIgnoreCase);
+
+        // Verifica si la ruta actual está en la lista de rutas exentas
+        if (!user.Identity.IsAuthenticated && !isUserRoute)
+        {
+            NavigationManager.NavigateTo("/Account/Login", true);
+        }
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        await CheckAuthenticationStateAsync();
+    }
+
+    
+
+
+    // private void OnRemovingPc(string locationValue)
+    // {
+    //     modalLocationValue = locationValue;
+    //     showingModal?.ShowConfirmationModal(locationValue);
+    //     Console.WriteLine("valor en mainlayout:" + modalLocationValue);
+    //     StateHasChanged();
+    // }
+    
+    public void ToggleActiveSideBarStyles()
+    {
+        ActiveToggle = !ActiveToggle;
+        ActiveToggleLock = false;
+        ActiveSideBarStyles = ActiveToggle ? "sidebar-active" : "";
+        SideBarIcon = ActiveToggle ? "menu_open" : "menu";
+        LockBarIcon = "lock_open";
+    }
+
+    private void OnDeletingUser(string locationValue)
+    {
+        modalLocationValue = locationValue;
+
+        showingModal?.ShowConfirmationModal(locationValue);
+
+        Console.WriteLine("valor en mainlayout:" + modalLocationValue);
+
+
+        StateHasChanged();
+    }
+    public void LockSideBarToggle()
+    {
+        ActiveToggleLock = !ActiveToggleLock;
+        LockBarIcon = ActiveToggleLock ? "lock" : "lock_open";
+    }
+
+    public void ApplyActiveSideBarStyles()
+    {
+        if (!ActiveToggle && !ActiveToggleLock)
+        {
+            ActiveSideBarStyles = string.IsNullOrEmpty(ActiveSideBarStyles) ? "sidebar-active" : "";
+        }
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            await Task.Delay(255);
+            PageTransition = "visible-transition";
+            StateHasChanged();
+
+            // await JSRuntime.InvokeVoidAsync("initToggleButtonVisibility");
+
+
+        }
+    }
+
+
+    public void toggleButtonVisibility()
+    {
+        // JSRuntime.InvokeVoidAsync("toggleButtonVisibility");
+    }
+
+
+    protected override void OnInitialized()
+    {
+        PageTransition = "hidden-transition";
+        NavigationManager.LocationChanged += HandleLocationChanged;
+    }
+
+
+
+
+
+
+    private async void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        // Apply hidden-transition first
+        PageTransition = "hidden-transition";
+        StateHasChanged();  // Force re-render
+
+        await Task.Delay(250);
+        // Then apply visible-transition
+        PageTransition = "visible-transition";
+        StateHasChanged();  // Force re-render again
+    }
+    public void Dispose()
+    {
+        // JSRuntime.InvokeVoidAsync("window.removeEventListener", "scroll", DotNetObjectReference.Create(new Action(toggleButtonVisibility)));
+
+        NavigationManager.LocationChanged -= HandleLocationChanged; // Unsubscribe to avoid memory leaks
+
+
+    }
+}

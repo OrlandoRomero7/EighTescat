@@ -1,0 +1,101 @@
+
+
+.navbar-toggler {
+    background-color: var(--brand-text);
+}
+
+
+.top-row {
+    height: 3.5rem;
+    border-radius: 1rem 1rem 0 0;
+    background: linear-gradient( to left, rgba(0,0,0,0), rgba(0,0,0,0.4), rgba(0,0,0,0)) left bottom rgba(0,0,0,0) no-repeat;
+    background-size: 100% 1px;
+}
+
+
+.navbar-brand {
+    font-size: 1.1rem;
+    color: var(--brand-text);
+}
+
+    .navbar-brand:hover {
+        color: var(--brand-text);
+    }
+
+    .navbar-brand:focus {
+        color: var(--brand-text);
+    }
+
+.oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+
+.nav-link span {
+    font-size: 1.15rem;
+}
+
+span.nav-link-tab {
+    font-size: .90rem;
+}
+
+
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
+
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
+
+.nav-item ::deep a {
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+    /*    color: var(--brand-text);*/
+}
+
+    .nav-item ::deep a.active {
+        background-color: rgba(36,93,130,0.25);
+        font-weight: 600;
+    }
+
+    .nav-item ::deep a:hover {
+        background-color: rgba(36,93,130,0.1);
+        font-weight: 500;
+    }
+
+@media (min-width: 641px) {
+
+    .container-fluid {
+        justify-content: center;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .collapse {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+
+    .nav-scrollable {
+        /* Allow sidebar to scroll for tall menus */
+        height: calc(100vh - 10rem);
+        overflow-y: auto;
+        overflow:hidden;
+    }
+
+
+}

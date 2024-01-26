@@ -1,0 +1,20 @@
+.overlay-alert[b-xc92gn3uii] {
+    position: fixed;
+    top: .5rem;
+    right: 20px;
+    z-index: 10;
+    width:25%;
+}
+
+
+
+.cards.container[b-xc92gn3uii] {
+    max-width: 100%;
+    padding: 0 5%;
+}
+
+@media screen and (min-width: 2000px) {
+    .cards.container[b-xc92gn3uii] {
+        padding: 0 10%;
+    }
+}

@@ -1,0 +1,168 @@
+﻿
+<DataAnnotationsValidator />
+
+<div class="row mb-3">
+
+
+    <FormFieldSet Width="col-2" Label="Numero de Empleado">
+
+        <InputNumber id="Numero de Empleado" class="form-control" @bind-Value="User.ID_USER" />
+        <ValidationMessage For="() => User.ID_USER" />
+
+    </FormFieldSet>
+
+
+    <FormFieldSet Width="col-2" Label="Privilegios Web">
+        <div class="row">
+            <InputCheckbox id="Privilegios Web" style="width:1rem; margin:.5rem 0 0 1rem; " @bind-Value="User.NON_NULL_WEB_PRIVILEGES" />
+        </div>
+        <ValidationMessage For="() => User.NON_NULL_WEB_PRIVILEGES" />
+    </FormFieldSet>
+</div>
+
+
+
+<div class="row mb-3">
+
+    <FormFieldSet Width="col-md-6" Label="Nombre Completo">
+
+        <InputText id="Nombre Completo" class="form-control" @bind-Value="User.NAME" />
+        <ValidationMessage For="() => User.NAME" />
+
+    </FormFieldSet>
+
+
+    <FormFieldSet Width="col-md-6" Label="Departamento">
+
+        <InputSelect id="Departamento" class="form-control" @bind-Value="User.DEPT">
+            @if (User.DEPT is null)
+            {
+                <option value="@User.DEPT">@User.DEPT</option>
+            }
+
+            @if (DepartmentsList is not null)
+            {
+                foreach (var dept in DepartmentsList)
+                {
+
+                    <option value="@dept">@dept</option>
+                }
+            }
+        </InputSelect>
+        <ValidationMessage For="() => User.DEPT" />
+
+    </FormFieldSet>
+
+
+
+</div>
+
+<div class="row mb-3">
+
+    <FormFieldSet Width="col-md-6" Label="Area">
+
+        <InputSelect id="Area" class="form-control" @bind-Value="User.AREA">
+
+            @if (User.AREA is null)
+            {
+                <option value="@User.AREA">@User.AREA</option>
+            }
+
+            @if (AreasList is not null)
+            {
+                foreach (var area in AreasList)
+                {
+
+                    <option value="@area">@area</option>
+                }
+            }
+
+        </InputSelect>
+        <ValidationMessage For="() => User.AREA" />
+
+    </FormFieldSet>
+
+    <FormFieldSet Width="col-md-6" Label="Oficina">
+
+        <InputSelect id="Office" class="form-control" @bind-Value="User.OFFICE">
+
+            @if (User.OFFICE is null)
+            {
+                <option value="@User.OFFICE">@User.OFFICE</option>
+            }
+
+            @if (OfficeList is not null)
+            {
+                foreach (var office in OfficeList)
+                {
+
+                    <option value="@office">@office</option>
+                }
+            }
+        </InputSelect>
+        <ValidationMessage For="() => User.OFFICE" />
+
+
+
+
+    </FormFieldSet>
+
+</div>
+
+<div class="row mb-3">
+    <FormFieldSet Width="col-md-6" Label="Puesto">
+
+        <InputText id="Puesto" class="form-control" @bind-Value="User.POSITION" />
+        <ValidationMessage For="() => User.POSITION" />
+
+    </FormFieldSet>
+
+
+    <FormFieldSet Width="col-md-6" Label="Fecha de Ingreso">
+
+        <InputDate id="Fecha de Ingreso" class="form-control" @bind-Value="User.ENTRY_DATE" />
+
+        <ValidationMessage For="() => User.ENTRY_DATE" />
+
+    </FormFieldSet>
+
+</div>
+
+
+<div class="row mb-3">
+    <FormFieldSet Width="col-md-6" Label="Extension Tel.">
+
+
+
+        <InputNumber id="Tel" class="form-control" @bind-Value="User.TEL" />
+        <ValidationMessage For="() => User.TEL" />
+
+    </FormFieldSet>
+
+
+    <FormFieldSet Width="col-md-6" Label="Celular">
+
+        <InputNumber id="Cel" class="form-control" @bind-Value="User.CEL" />
+        <ValidationMessage For="() => User.CEL" />
+
+    </FormFieldSet>
+
+</div>
+
+
+
+
+@code {
+    [Parameter]
+    public User? User { get; set; }
+
+    [Parameter]
+    public string[]? DepartmentsList { get; set; }
+    [Parameter]
+    public string[]? OfficeList { get; set; }
+    [Parameter]
+    public string[]? AreasList { get; set; }
+
+
+ 
+}

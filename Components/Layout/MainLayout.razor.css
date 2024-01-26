@@ -1,0 +1,177 @@
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(180deg,rgb(17 129 205 / 4%) 70px,rgba(225,235,255,0) 290px);
+}
+
+
+
+main {
+    flex: 1;
+    margin-left: 0;
+    margin-right: 0;
+   
+}
+
+
+
+    main.visible-transition {
+        opacity: 1;
+        filter: blur(0);
+        transition: opacity 250ms, filter 250ms ease;
+    }
+
+    main.hidden-transition {
+        opacity: 0;
+        filter: blur(10px);
+        transition: filter 250ms ease-out;
+    }
+
+
+
+.active-sidebar-toggle {
+    display: none;
+    z-index: 9;
+}
+
+
+
+
+
+@media (min-width: 920px) {
+    .active-sidebar-toggle.sidebar-active {
+        transform: translateX(168px);
+    }
+}
+
+
+.sidebar {
+    background-image: linear-gradient(180deg, var(--plain-white) 0%, #F6F6F6 70%);
+    border-radius: 1rem;
+ /*   overflow: hidden;*/
+    box-shadow: 0 0 2rem 0 rgba(136,152,170,.45);
+    transition: width 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms, background-color 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.top-row {
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row ::deep a, .top-row .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth) {
+        display: none;
+    }
+
+    .top-row.auth {
+        justify-content: space-between;
+    }
+
+    .top-row a, .top-row .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        min-width: 5rem;
+        width: 5rem;
+        height: calc(100vh - 2rem);
+        position: sticky;
+        top: calc(0px + 1rem);
+        margin: 1rem;
+        z-index: 11;
+    }
+
+        .sidebar.sidebar-active {
+            width: 250px;
+        }
+
+    @media (max-width: 920px) {
+        .sidebar.sidebar-active {
+            width: 5rem;
+        }
+
+        .active-sidebar-toggle {
+            transform: translateX(0px);
+        }
+    }
+
+    .active-sidebar-toggle {
+        display: block;
+        position: fixed;
+        left: 116px;
+        top: 28px;
+        transform: translateX(0px);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+
+    .top-row {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row, article {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+
+
+@media (min-width: 1640px) {
+    main.container {
+        width: 250px;
+    }
+}
+
+
+.scroll-to-top-button {
+    transition: all 0.75s ease-in-out;
+    opacity: 0; /* Start with the button invisible */
+    visibility: hidden;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    padding: 0;
+    border: none;
+    background: none;
+    background: var(--plain-white);
+    display: flex;
+    height: 2.75rem;
+    width: 2.75rem;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+    .scroll-to-top-button:hover {
+        transform: scale(1.25);
+        transition: all 0.75s ease-in-out;
+    }
+
+    /* When the button should be visible */
+    .scroll-to-top-button.visible {
+        opacity: 1;
+        visibility: visible;
+    }

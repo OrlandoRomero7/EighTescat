@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\TescatGlobalServer.bundle.scp.css",
+      "PackagePath": "staticwebassets\\TescatGlobalServer.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TescatGlobalServer.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.TescatGlobalServer.props",
+      "PackagePath": "build\\TescatGlobalServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TescatGlobalServer.props",
+      "PackagePath": "buildMultiTargeting\\TescatGlobalServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.TescatGlobalServer.props",
+      "PackagePath": "buildTransitive\\TescatGlobalServer.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

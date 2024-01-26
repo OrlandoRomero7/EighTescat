@@ -1,0 +1,51 @@
+﻿
+<div class="row mb-3">
+
+    <FormFieldSet Width="col-md-6" Label="Tipo de Computadora">
+        <InputText id="pc-type" class="form-control" @bind-Value="Computer.PC_TYPE" />
+        <ValidationMessage For="() => Computer.PC_TYPE" />
+    </FormFieldSet>
+
+    <FormFieldSet Width="col-md-6" Label="Direccion IP">
+        <InputText id="pc-ip" class="form-control" @bind-Value="Computer.IP" />
+        <ValidationMessage For="() => Computer.IP" />
+    </FormFieldSet>
+
+</div>
+
+
+<div class="row mb-3">
+
+    <FormFieldSet Width="col-md-6" Label="Nombre del Equipo">
+        <InputText id="pc-name" class="form-control" @bind-Value="Computer.PC_NAME" />
+        <ValidationMessage For="() => Computer.PC_NAME" />
+    </FormFieldSet>
+
+    <FormFieldSet Width="col-md-6" Label="Modelo">
+        <InputText id="model" class="form-control" @bind-Value="Computer.MODEL" />
+        <ValidationMessage For="() => Computer.MODEL" />
+    </FormFieldSet>
+
+</div>
+
+
+<div class="row mb-3">
+
+    <FormFieldSet Width="col-md-6" Label="Ranuras de RAM Ocupadas">
+        <InputText id="pc-used-ram" class="form-control" @bind-Value="Computer.USED_RAM_SLOTS" />
+        <ValidationMessage For="() => Computer.USED_RAM_SLOTS" />
+    </FormFieldSet>
+
+    <FormFieldSet Width="col-md-6" Label="Fecha del Ultimo Mantenimiento">
+        <InputDate id="last-maintenance" class="form-control" @bind-Value="Computer.LAST_MAINT" />
+        <ValidationMessage For="() => Computer.LAST_MAINT" />
+    </FormFieldSet>
+
+</div>
+
+@code {
+    [Parameter]
+    public UserPC? Computer { get; set; }
+
+
+}

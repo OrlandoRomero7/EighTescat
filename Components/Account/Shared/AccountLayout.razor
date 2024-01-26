@@ -1,0 +1,31 @@
+﻿@inherits LayoutComponentBase
+@* @layout TescatGlobalServer.Components.Layout.MainLayout *@
+@inject NavigationManager NavigationManager
+
+<NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+    <span class="bi bi-house-fill me-3" aria-hidden="true"></span> <span class="nav-link-tab"> Inicio</span>
+</NavLink>
+@if (HttpContext is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @Body
+}
+
+@code {
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (HttpContext is null)
+        {
+            // If this code runs, we're currently rendering in interactive mode, so there is no HttpContext.
+            // The identity pages need to set cookies, so they require an HttpContext. To achieve this we
+            // must transition back from interactive mode to a server-rendered page.
+            NavigationManager.Refresh(forceReload: true);
+        }
+    }
+}
