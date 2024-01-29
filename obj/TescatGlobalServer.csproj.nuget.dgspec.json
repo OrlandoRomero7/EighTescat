@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\TescatGlobalServer.csproj": {}
+    "C:\\Users\\medin\\Projects\\EighTescat\\TescatGlobalServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\TescatGlobalServer.csproj": {
+    "C:\\Users\\medin\\Projects\\EighTescat\\TescatGlobalServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\TescatGlobalServer.csproj",
+        "projectUniqueName": "C:\\Users\\medin\\Projects\\EighTescat\\TescatGlobalServer.csproj",
         "projectName": "TescatGlobalServer",
-        "projectPath": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\TescatGlobalServer.csproj",
-        "packagesPath": "C:\\Users\\Orlando\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Orlando\\Desktop\\Proyectos\\TescatGlobalServer\\obj\\",
+        "projectPath": "C:\\Users\\medin\\Projects\\EighTescat\\TescatGlobalServer.csproj",
+        "packagesPath": "C:\\Users\\medin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\medin\\Projects\\EighTescat\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Orlando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\medin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -26,12 +26,22 @@
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="stock">
-                <span class="bi bi-motherboard-fill me-3" aria-hidden="true"></span> <span class="nav-link-tab"> Almacen</span>
+
+                <span class="bi bi-motherboard-fill me-3" aria-hidden="true"> </span>
+
+                <span class="nav-link-tab"> Almacen</span>
+
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
+
+                <span class="bi bi-lock-nav-menu me-3" aria-hidden="true">
+
+                    <span class="nav-link-tab"> Auth Required</span>
+
+                </span>
+
             </NavLink>
         </div>
 
@@ -39,15 +49,18 @@
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="Account/Manage">
-                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true">   </span>
+                        <span class="nav-link-tab">  @context.User.Identity?.Name</span>
+
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
                     <form action="Account/Logout" method="post">
                         <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl"  />
-                        <button type="submit" class="nav-link">
-                            <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
+                        <input type="hidden" name="ReturnUrl" />
+                        <button type="submit" class="nav-link btn btn-outline-primary">
+                            <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span>
+                            <span class="nav-link-tab">Logout</span>
                         </button>
                     </form>
                 </div>
@@ -89,9 +102,7 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
-
-
-    }
+}
 
 
 

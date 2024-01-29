@@ -38,6 +38,13 @@
     padding-bottom: 0.5rem;
 }
 
+nav-link {
+    color: var(--brand-text) !important;
+}
+
+a.nav-link {
+    color: var(--brand-text) !important;
+}
 
 .nav-link span {
     font-size: 1.15rem;
