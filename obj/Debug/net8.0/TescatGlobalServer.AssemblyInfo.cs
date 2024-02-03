@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TescatGlobalServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c89d83061356f679e672d810947788a567712592")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0fe43d30861c60ec222c24f1af479fffea0fedfa")]
 [assembly: System.Reflection.AssemblyProductAttribute("TescatGlobalServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TescatGlobalServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

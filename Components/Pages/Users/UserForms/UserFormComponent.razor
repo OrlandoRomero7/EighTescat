@@ -3,9 +3,25 @@
 
 
 
+
     @if (User is not null)
     {
         <FormSection Title="Informacion Basica">
+
+            <img src="@GetImagePath()" style="width:12rem; height:12rem; display:block; border-radius:1rem; margin-bottom:1rem; object-fit: cover;">
+
+            <UserPictureUpload @ref="userPictureUploadRef"
+                               OnFileUploaded="HandleFileUpload"
+                               OnFilePreviewReady="HandleFilePreview"
+                               UploadComponentStyle="@HandlingUploadStyles()"
+                               ID_USER="@User.ID_USER" />
+
+            @if (User?.IMAGE_NAME != null)
+            {
+
+                <button type="button" class="btn btn-danger mt-2" @onclick="RemoveImage" style="width: 8rem;">Quitar Imagen</button>
+            }
+
             <UserFields User="@User" DepartmentsList="@DepartmentsList" OfficeList="@OfficeList" AreasList="@AreasList" />
         </FormSection>
     }
@@ -14,8 +30,8 @@
     @if (Emails is not null)
     {
         <FormSection Title="Emails">
-         
-            <EmailFields Emails="Emails"  />
+
+            <EmailFields Emails="Emails" />
 
         </FormSection>
     }
@@ -89,6 +105,16 @@
     public EventCallback<bool> OnCancel { get; set; }
 
 
+    private string? imageFilePath;
+
+    private string? base64ImagePreview;
+
+    private UserPictureUpload? userPictureUploadRef;
+
+
+    private string? UploadStyles;
+
+
 
 
 
@@ -102,9 +128,74 @@
     }
 
 
+
+    private void HandleFileUpload(string path)
+    {
+        imageFilePath = path;
+        Console.WriteLine("Ruta de la imagen: " + imageFilePath);
+        // Aquí puede a signar imageFilePath al modelo de usuario, si es necesario
+        if (User is not null)
+        {
+            User.IMAGE_NAME = imageFilePath;
+        }
+
+    }
+
+
+    private void HandleFilePreview(string base64String)
+    {
+        base64ImagePreview = base64String;
+    }
+
+    private string GetImagePath()
+    {
+
+        if (!string.IsNullOrEmpty(base64ImagePreview))
+        {
+            return base64ImagePreview;
+        }
+        else if (User?.IMAGE_NAME is not null)
+        {
+            return $"/Images/{User.IMAGE_NAME}";
+        }
+        else
+        {
+            return $"/Images/default.svg";
+        }
+    }
+
+    private void RemoveImage()
+    {
+        base64ImagePreview = null;
+        imageFilePath = null;
+        if (User is not null)
+        {
+            User.IMAGE_NAME = null;
+        }
+        userPictureUploadRef?.ClearingFile();
+    }
+
+    private string HandlingUploadStyles()
+    {
+        return
+        (!string.IsNullOrEmpty(base64ImagePreview) || (User?.IMAGE_NAME is not null && User.IMAGE_NAME != "default.svg"))
+        ? "Cambiar" : "Agregar";
+    }
+
+
     private async Task HandleValidSubmit()
     {
-         
+        if (userPictureUploadRef != null)
+        {
+            await userPictureUploadRef.SubmitImage();
+        }
+
+        // Actualizar User.IMAGE_NAME sólo si imageFilePath tiene un valor
+        if (User != null && !string.IsNullOrEmpty(imageFilePath))
+        {
+            User.IMAGE_NAME = imageFilePath;
+        }
+
         if (OnSubmit.HasDelegate)
         {
             await OnSubmit.InvokeAsync(true);

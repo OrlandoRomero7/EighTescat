@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\TescatGlobalServer.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\default.svg",
+      "PackagePath": "staticwebassets\\Images\\default.svg"
+    },
+    {
       "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },

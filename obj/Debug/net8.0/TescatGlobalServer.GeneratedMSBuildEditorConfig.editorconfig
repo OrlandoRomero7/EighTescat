@@ -226,8 +226,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcVXNlckZvcm1Db21wb25lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/UserImageComponent.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcVXNlckltYWdlQ29tcG9uZW50LnJhem9y
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/UserPictureUpload.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcVXNlclBpY3R1cmVVcGxvYWQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/medin/Projects/EighTescat/Components/Pages/Weather.razor]
