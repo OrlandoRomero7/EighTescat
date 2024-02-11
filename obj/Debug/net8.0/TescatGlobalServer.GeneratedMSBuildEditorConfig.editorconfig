@@ -178,8 +178,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Computers/ComputersHomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb21wdXRlcnNcQ29tcHV0ZXJzSG9tZVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/medin/Projects/EighTescat/Components/Pages/Error.razor]
@@ -190,48 +190,44 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserDetails/AddUserDetailsPage.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRGV0YWlsc1xBZGRVc2VyRGV0YWlsc1BhZ2UucmF6b3I=
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserDetailsPages/AddUserDetailsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRGV0YWlsc1BhZ2VzXEFkZFVzZXJEZXRhaWxzUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserDetails/UserDetailsPage.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRGV0YWlsc1xVc2VyRGV0YWlsc1BhZ2UucmF6b3I=
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserDetailsPages/UserDetailsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRGV0YWlsc1BhZ2VzXFVzZXJEZXRhaWxzUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/ComputerFields.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcQ29tcHV0ZXJGaWVsZHMucmF6b3I=
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/Fields/ComputerFields.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRmllbGRzXENvbXB1dGVyRmllbGRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/CredentialsFields.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcQ3JlZGVudGlhbHNGaWVsZHMucmF6b3I=
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/Fields/CredentialsFields.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRmllbGRzXENyZWRlbnRpYWxzRmllbGRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/EmailFields.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRW1haWxGaWVsZHMucmF6b3I=
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/Fields/EmailFields.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRmllbGRzXEVtYWlsRmllbGRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/FormFieldSet.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRm9ybUZpZWxkU2V0LnJhem9y
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/Fields/UserFields.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRmllbGRzXFVzZXJGaWVsZHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/FormsComponents/FormFieldSet.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRm9ybXNDb21wb25lbnRzXEZvcm1GaWVsZFNldC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/FormsComponents/UserFormComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRm9ybXNDb21wb25lbnRzXFVzZXJGb3JtQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/FormsComponents/UserPictureUpload.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRm9ybXNDb21wb25lbnRzXFVzZXJQaWN0dXJlVXBsb2FkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/FormSection.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcRm9ybVNlY3Rpb24ucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/UserFields.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcVXNlckZpZWxkcy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/UserFormComponent.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcVXNlckZvcm1Db21wb25lbnQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Users/UserForms/UserPictureUpload.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xVc2VyRm9ybXNcVXNlclBpY3R1cmVVcGxvYWQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/medin/Projects/EighTescat/Components/Routes.razor]
