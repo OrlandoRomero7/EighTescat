@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using TescatGlobalServer.Data.Models;
+using System;
 
 namespace TescatGlobalServer.Data
 {

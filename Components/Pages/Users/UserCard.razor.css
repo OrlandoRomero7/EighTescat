@@ -45,9 +45,14 @@ small.text-details {
     }
 
 
-.user-card img {
-    height: 15rem;
+.user-card {
+    min-width: 208px;
 }
+
+
+    .user-card img {
+        height: 15rem;
+    }
 
 @media screen and (min-width: 2000px) {
     .user-card img {

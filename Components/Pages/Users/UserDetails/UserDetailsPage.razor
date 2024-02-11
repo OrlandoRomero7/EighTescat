@@ -239,7 +239,7 @@ else
 
         await NullifyUserIdAsync(context.Emails.Where(p => p.ID_USER == deletedUser.ID_USER));
 
-         context.Users.Remove(deletedUser);
+        context.Users.Remove(deletedUser);
 
         await context.SaveChangesAsync();
         await transaction.CommitAsync();

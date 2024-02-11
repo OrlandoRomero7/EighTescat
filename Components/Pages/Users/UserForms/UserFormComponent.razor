@@ -44,20 +44,22 @@
         </FormSection>
     }
 
-
-    <div class="mt-3">
-        @if (IsEdit)
-        {
-            <button type="submit" class="btn btn-primary" disabled="@IsBusy">Actualizar</button>
-            <button type="submit" class="btn btn-outline-danger" @onclick="(() => OnDelete.InvokeAsync(User))" disabled="@IsBusy">Eliminar</button>
-            <button type="button" class="btn btn-secondary" @onclick="HandleCancel" disabled="@IsBusy">Cancelar</button>
-        }
-        else
-        {
-            <button type="submit" class="btn btn-primary" disabled="@IsBusy">Agregar Usuario</button>
-        }
+    @if (User is not null || Emails is not null || Credentials is not null)
+    {
+        <div class="mt-3">
+            @if (IsEdit)
+            {
+                <button type="submit" class="btn btn-primary" disabled="@IsBusy">Actualizar</button>
+                <button type="submit" class="btn btn-outline-danger" @onclick="(() => OnDelete.InvokeAsync(User))" disabled="@IsBusy">Eliminar</button>
+                <button type="button" class="btn btn-secondary" @onclick="HandleCancel" disabled="@IsBusy">Cancelar</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary" disabled="@IsBusy">Agregar Usuario</button>
+            }
     </div>
 
+    }
 
 </EditForm>
 

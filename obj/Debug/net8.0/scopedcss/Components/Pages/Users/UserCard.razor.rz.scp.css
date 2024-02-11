@@ -45,9 +45,14 @@ small.text-details[b-j3jz0rm3d0] {
     }
 
 
-.user-card img[b-j3jz0rm3d0] {
-    height: 15rem;
+.user-card[b-j3jz0rm3d0] {
+    min-width: 208px;
 }
+
+
+    .user-card img[b-j3jz0rm3d0] {
+        height: 15rem;
+    }
 
 @media screen and (min-width: 2000px) {
     .user-card img[b-j3jz0rm3d0] {

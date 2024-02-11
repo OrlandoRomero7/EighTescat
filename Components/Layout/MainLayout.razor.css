@@ -39,7 +39,7 @@ main {
 
 
 
-@media (min-width: 920px) {
+@media (min-width: 960px) {
     .active-sidebar-toggle.sidebar-active {
         transform: translateX(168px);
     }
@@ -104,7 +104,7 @@ main {
             width: 250px;
         }
 
-    @media (max-width: 920px) {
+    @media (max-width: 960px) {
         .sidebar.sidebar-active {
             width: 5rem;
         }

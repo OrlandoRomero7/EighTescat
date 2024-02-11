@@ -5,6 +5,26 @@
       "PackagePath": "staticwebassets\\TescatGlobalServer.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\11.png",
+      "PackagePath": "staticwebassets\\Images\\11.png"
+    },
+    {
+      "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\152.png",
+      "PackagePath": "staticwebassets\\Images\\152.png"
+    },
+    {
+      "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\177.jpg",
+      "PackagePath": "staticwebassets\\Images\\177.jpg"
+    },
+    {
+      "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\32.png",
+      "PackagePath": "staticwebassets\\Images\\32.png"
+    },
+    {
+      "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\405.png",
+      "PackagePath": "staticwebassets\\Images\\405.png"
+    },
+    {
       "Id": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\default.svg",
       "PackagePath": "staticwebassets\\Images\\default.svg"
     },

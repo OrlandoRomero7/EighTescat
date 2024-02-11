@@ -1,28 +1,126 @@
 ﻿@page "/users"
-@page "/users/{SearchTerm}"
-@page "/users/{SearchTerm}/office/{UserOffice}/entrydate/{UserLength:int}"
+@page "/users/{searchTerm}"
+@page "/users/{searchTerm}/office/{userOffice}/entrydate/{userLength:int}"
 
 
 <PageTitle>Usuarios - Project Tescatlipoca</PageTitle>
 
 <UserHomePageLayout>
-    <h1>Usuarios</h1>
 
 
 
-    @if (Users == null)
+
+
+    @if (SearchTerm != null || UserOffice != null || UserLength != null)
     {
-        <p>Cargando usuarios...</p>
-    }
-    else if (!Users.Any())
-    {
-        <p>No se han encontrado usuarios ☹️</p>
+        <NavLink href="users" Match="NavLinkMatch.All">
+            <i class="bi bi-arrow-left" style="font-size:2rem; margin-top:-1rem"></i>
+        </NavLink>
     }
     else
     {
+        <h1 style="padding-left: 5px; margin:3.625rem 0 1rem .25rem; ">Usuarios</h1>
+    }
 
 
-        <div style="row-gap: 4rem; justify-content: center; display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top:2.5rem">
+    <div style="display: flex; margin-top:1rem; flex-direction:column;">
+        @if (Users != null && SearchTerm != null)
+        {
+
+
+
+
+            <div style="height:2rem; display:flex; align-items:center; width:100%; margin-bottom:1.25%;">
+
+                <h4 style="margin-top: 1%;  margin-right: .25%">
+
+                    <i class="material-symbols-outlined search-icon " style="font-size:1.6rem;">search</i>
+
+                </h4>
+
+                <i style="margin-left: 4px;">Resultados para:</i>
+                <i style="color: var(--brand); font-weight:500; font-size:1.25rem; margin-left: 4px; "> @SearchTerm</i>
+
+            </div>
+
+
+        }
+
+        @if (UserOffice != null || UserLength != null)
+        {
+
+
+
+            <div style="height:2rem; display:flex; align-items:center; width:100%; ">
+                <h4 style="margin-top: 1%;  margin-right: .25%">
+
+                    @*Icono Filtro*@
+                    <i style="font-size:1.5rem; color:var(--brand-secondary); " class="bi bi-funnel"></i>
+
+                </h4>
+                @if (UserOffice != null)
+                {
+                    <i>Ciudad:</i> <i style="color: var(--brand); font-weight: 500; font-size: 1.25rem; margin-left: 4px; margin-right: 14px; "> @UserOffice</i>
+                }
+
+
+
+
+                @if (UserLength != null)
+                {
+
+                    @if (UserLength > 0)
+                    {
+                        <i style="margin-left: 4px;">Antiguedad mayor a:</i>
+                    }
+                    @if (UserLength < 0)
+                    {
+                        <i style="margin-left: 4px;">Antiguedad menor a:</i>
+                    }
+
+
+
+
+                    @if (UserLength > 1 || UserLength < -1)
+                    {
+                        <i style="color: var(--brand); font-weight:500; font-size:1.25rem; margin-left: 4px; "> @Math.Abs(UserLength ?? 0) años </i>
+                    }
+                    else
+                    {
+                        <i style="color: var(--brand); font-weight:500; font-size:1.25rem; margin-left: 4px; "> @Math.Abs(UserLength ?? 0) año </i>
+
+
+                    }
+
+                }
+            </div>
+
+
+
+
+
+        }
+
+    </div>
+
+
+
+
+    <div style="row-gap: 4rem; justify-content: center; display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top:22px">
+
+
+        @if (Users == null)
+        {
+            <p>Cargando usuarios...</p>
+        }
+        else if (!Users.Any())
+        {
+            <p>No se han encontrado usuarios ☹️</p>
+        }
+        else
+        {
+
+
 
             @foreach (var user in Users)
             {
@@ -31,9 +129,10 @@
 
             }
 
-        </div>
 
-    }
+        }
+    </div>
+
 
 </UserHomePageLayout>
 
@@ -61,11 +160,16 @@
 
 
     protected override async
-    Task OnParametersSetAsync() => await DisplayCards();
+    Task OnParametersSetAsync()
+    {
 
+        Console.WriteLine("UserOffice: " + UserOffice);
+        await DisplayCards();
+    }
 
     protected override async
-    Task OnInitializedAsync() => await DisplayCards();
+    Task OnInitializedAsync()
+    { await DisplayCards(); }
 
 
     private async Task DisplayCards()
@@ -166,7 +270,7 @@
               x.OFFICE?.Contains(UserOffice, StringComparison.CurrentCultureIgnoreCase) == true);
         }
 
-
+        Console.WriteLine("UserOffice: " + UserOffice);
 
         if (UserLength.HasValue)
         {

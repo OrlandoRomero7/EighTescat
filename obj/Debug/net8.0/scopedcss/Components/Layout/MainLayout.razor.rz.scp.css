@@ -39,7 +39,7 @@ main[b-hy1stwtmvn] {
 
 
 
-@media (min-width: 920px) {
+@media (min-width: 960px) {
     .active-sidebar-toggle.sidebar-active[b-hy1stwtmvn] {
         transform: translateX(168px);
     }
@@ -104,7 +104,7 @@ main[b-hy1stwtmvn] {
             width: 250px;
         }
 
-    @media (max-width: 920px) {
+    @media (max-width: 960px) {
         .sidebar.sidebar-active[b-hy1stwtmvn] {
             width: 5rem;
         }
