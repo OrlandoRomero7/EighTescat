@@ -1,12 +1,198 @@
 ﻿@page "/devices"
-
+@using Microsoft.AspNetCore.Components.QuickGrid
 
 
 <PageTitle>Equipos - Project Tescatlipoca</PageTitle>
 
-<h1 style="padding-left: 5px; margin:3.625rem 0 1rem .25rem; ">Equipos</h1>
+@* <h1 style="padding-left: 5px; margin:3.625rem 0 1rem .25rem; ">Equipos</h1> *@
 
+
+<div class="container shadow">
+    <div class="grid ">
+        <QuickGrid Items="@computersData" Theme="tescat" Pagination="@pagination">
+
+            <PropertyColumn Align=Align.Left Property="@(c => c.PC_NAME)" Sortable="true" Title="Nombre del Equipo" />
+
+
+
+
+            <PropertyColumn Align=Align.Left Property="@(c => c.LAST_MAINT)" Format="dd-MM-yyyy" Sortable="true" Title="Fecha del Ultimo Mantenimiento" />
+
+
+            <PropertyColumn Align="Align.Left" Property="@(c => ComputerUser(c.ID_USER))" Sortable="true" Title="Usuario" Class="user-name">
+
+
+                <ColumnOptions>
+                    <div class="search-box">
+                        <input type="search" autofocus @bind="nameFilter" @bind:event="oninput" placeholder="User..." />
+                    </div>
+                </ColumnOptions>
+
+            </PropertyColumn>
+
+
+            <PropertyColumn Align=Align.Center Property="@(c => c.PC_TYPE)" Sortable="true" Title="Tipo" />
+
+
+            <PropertyColumn Align=Align.Left Property="@(c => ComputerOffice(c.ID_USER))" Sortable="true" Title="Oficina" />
+
+            <PropertyColumn Align=Align.Left Property="@(c => ComputerAnyDeskID(c.ID_PC))" Sortable="true" Title="ID Anydesk" />
+
+
+            @*
+            <PropertyColumn Align=Align.Center Property="@(c => c.IP)" Sortable="true" Title="Direccion IP" /> *@
+
+        </QuickGrid>
+
+
+
+
+    </div>
+
+
+
+    <div class="paginator-container">
+        <div class="paginator-content">
+
+
+            <Paginator State="@pagination" />
+
+            <div class="page-size-chooser">
+                Equipos por pagina:
+                <select @bind="@pagination.ItemsPerPage">
+                    <option>6</option>
+                    <option>12</option>
+                    <option>18</option>
+                    <option>24</option>
+                    <option>30</option>
+                    <option>36</option>
+                    <option>42</option>
+                    <option>48</option>
+                </select>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+</div>
 
 @code {
+
+    IQueryable<UserPC>? allComputersList { get; set; }
+    PaginationState pagination = new PaginationState { ItemsPerPage = 24 };
+
+
+    private List<UserPC>? Computers { get; set; }
+    private List<User>? Users { get; set; }
+    private List<ComputerCredentials>? Credentials { get; set; }
+
+    string? nameFilter;
+
+
+
+
+
+
+
+    IQueryable<UserPC> computersData
+    {
+        get
+        {
+            var result = allComputersList;
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                result = result.Where(c =>
+                ComputerUser(c.ID_USER).Contains(nameFilter, StringComparison.CurrentCultureIgnoreCase));
+            }
+
+
+
+            return result;
+        }
+    }
+
+
+
+    string ComputerUser(int? userId)
+    {
+        if (userId.HasValue && Users != null)
+        {
+            var user = Users.FirstOrDefault(u => u.ID_USER == userId);
+            return user?.NAME ?? "INACTIVO";
+        }
+
+        return "INACTIVO";
+    }
+
+
+    string ComputerOffice(int? userId)
+    {
+        if (userId.HasValue && Users != null)
+        {
+            var user = Users.FirstOrDefault(u => u.ID_USER == userId);
+            return user?.OFFICE ?? "";
+        }
+
+        return "";
+    }
+
+
+    string ComputerAnyDeskID(Guid? computerId)
+    {
+        if (computerId.HasValue && Credentials != null)
+        {
+            var id = Credentials.FirstOrDefault(u => u.ID_PC == computerId);
+            return id?.ID_ANYDESK ?? "";
+        }
+
+
+        return "";
+    }
+
+
+
+
+    protected override async
+    Task OnInitializedAsync()
+    {
+        try
+        {
+            using var context = ContextFactory.CreateDbContext();
+
+            await GetAllComputers(context);
+            await GetAllUsers(context);
+            await GetAllCredentials(context);
+
+            if (Computers is not null)
+            {
+                allComputersList = Computers.AsQueryable();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hubo un problema al cargar la informacion de los usuarios{ex.Message}");
+        }
+    }
+
+
+    private async
+     Task GetAllComputers(MainDbContext context) => Computers = await context.PC.ToListAsync();
+
+
+    private async
+    Task GetAllCredentials(MainDbContext context) => Credentials = await context.PC_Credentials.ToListAsync();
+
+
+    private async
+    Task GetAllUsers(MainDbContext context) => Users = await context.Users.ToListAsync();
+
+
+
+
 
 }

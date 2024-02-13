@@ -1,0 +1,98 @@
+﻿::deep .quickgrid[theme=tescat] {
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif;*/
+    width: 100%
+}
+
+    ::deep .quickgrid[theme=tescat] .col-title {
+        gap: 0.4rem; /* Separate the sort indicator from title text */
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    ::deep .quickgrid[theme=tescat] .sort-indicator {
+        /*   color: blue !important;*/
+    }
+
+    ::deep .quickgrid[theme=tescat] button.col-title:hover, ::deep .quickgrid[theme=tescat] .col-options-button:hover {
+        background-color: var(--brand);
+    }
+
+    ::deep .quickgrid[theme=tescat] button.col-title:active, ::deep .quickgrid[theme=tescat] .col-options-button:active {
+        background-color: var(--brand-hover);
+    }
+
+/* Subtle stripe effect */
+::deep tr:nth-child(even) {
+    background: rgba(198,212,222,0.5) !important;
+}
+
+div.grid {
+    height: 100%;
+    overflow-y: auto;
+}
+
+div.container {
+    height: 68.8%;
+    border-radius: 1rem;
+    width: 80%;
+    background: white;
+    padding: .75rem 0 1rem 1rem;
+    background: white;
+    overflow-y: hidden;
+}
+
+
+
+
+/* Sticky header while scrolling */
+::deep thead {
+    position: sticky;
+    top: 0;
+    background-color: var(--brand-white);
+    outline: 1px solid gray;
+    z-index: 1;
+}
+
+
+
+.paginator-container {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background-color: var(--brand-white);
+}
+
+
+.paginator-content {
+    position: relative;
+}
+
+.page-size-chooser {
+    position: absolute;
+    left: 6rem;
+    bottom: 0.45rem;
+}
+
+
+/* For WebKit browsers like Chrome and Safari */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(6 21 31 / 5%);
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--plain-white);
+    box-shadow: none;
+}
+
+
+/* Magnifying glass */
+::deep .user-name .col-options-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
+    margin-right:.5rem;
+}

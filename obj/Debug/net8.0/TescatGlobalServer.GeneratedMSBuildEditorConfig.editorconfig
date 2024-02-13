@@ -178,10 +178,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/medin/Projects/EighTescat/Components/Pages/Computers/ComputersHomePage.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb21wdXRlcnNcQ29tcHV0ZXJzSG9tZVBhZ2UucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/medin/Projects/EighTescat/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -249,6 +245,10 @@ build_metadata.AdditionalFiles.CssScope = b-yin75i1bvt
 [C:/Users/medin/Projects/EighTescat/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-hhjxwncdvi
+
+[C:/Users/medin/Projects/EighTescat/Components/Pages/Computers/ComputersHomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb21wdXRlcnNcQ29tcHV0ZXJzSG9tZVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-nm6lnvb7ii
 
 [C:/Users/medin/Projects/EighTescat/Components/Pages/Users/AddUserPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2Vyc1xBZGRVc2VyUGFnZS5yYXpvcg==

@@ -21,6 +21,9 @@ namespace TescatGlobalServer.Data
 
         public DbSet<UserPC> PC => Set<UserPC>();
 
+
+        public DbSet<ComputerCredentials> PC_Credentials => Set<ComputerCredentials>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -37,6 +40,10 @@ namespace TescatGlobalServer.Data
 
 
             modelBuilder.Entity<UserPC>()
+                .HasKey(d => d.ID_PC);
+
+
+            modelBuilder.Entity<ComputerCredentials>()
                 .HasKey(d => d.ID_PC);
 
         }

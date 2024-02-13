@@ -159,14 +159,14 @@ input[type="number"] {
     box-shadow: rgb(221, 221, 221) 0rem 0.0625rem 0.3125rem 0.0625rem;
 }
 
-}
+
 
 /* For Firefox */
-{
+/*{
     scrollbar-color: var(--plain-white) transparent;
     scrollbar-width: thin;
 }
-
+*/
 /* For Edge and IE */
 *::-ms-scrollbar {
     color: var(--plain-white);

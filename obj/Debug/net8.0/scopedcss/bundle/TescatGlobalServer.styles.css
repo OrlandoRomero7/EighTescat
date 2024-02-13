@@ -1,3 +1,5 @@
+@import '_content/Microsoft.AspNetCore.Components.QuickGrid/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css';
+
 /* _content/TescatGlobalServer/Components/Layout/MainLayout.razor.rz.scp.css */
 .page[b-hy1stwtmvn] {
     position: relative;
@@ -198,9 +200,6 @@ main[b-hy1stwtmvn] {
     font-size:1.75rem;
 }
 
-body[b-yin75i1bvt] {
-    background:red !important;
-}
 /* _content/TescatGlobalServer/Components/Layout/NavMenu.razor.rz.scp.css */
 
 
@@ -242,13 +241,6 @@ body[b-yin75i1bvt] {
     padding-bottom: 0.5rem;
 }
 
-nav-link[b-hhjxwncdvi] {
-    color: var(--brand-text) !important;
-}
-
-a.nav-link[b-hhjxwncdvi] {
-    color: var(--brand-text) !important;
-}
 
 .nav-link span[b-hhjxwncdvi] {
     font-size: 1.15rem;
@@ -309,6 +301,105 @@ span.nav-link-tab[b-hhjxwncdvi] {
     }
 
 
+}
+/* _content/TescatGlobalServer/Components/Pages/Computers/ComputersHomePage.razor.rz.scp.css */
+[b-nm6lnvb7ii] .quickgrid[theme=tescat] {
+    /* font-family: 'Roboto', Helvetica, Arial, sans-serif;*/
+    width: 100%
+}
+
+    [b-nm6lnvb7ii] .quickgrid[theme=tescat] .col-title {
+        gap: 0.4rem; /* Separate the sort indicator from title text */
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    [b-nm6lnvb7ii] .quickgrid[theme=tescat] .sort-indicator {
+        /*   color: blue !important;*/
+    }
+
+    [b-nm6lnvb7ii] .quickgrid[theme=tescat] button.col-title:hover, [b-nm6lnvb7ii] .quickgrid[theme=tescat] .col-options-button:hover {
+        background-color: var(--brand);
+    }
+
+    [b-nm6lnvb7ii] .quickgrid[theme=tescat] button.col-title:active, [b-nm6lnvb7ii] .quickgrid[theme=tescat] .col-options-button:active {
+        background-color: var(--brand-hover);
+    }
+
+/* Subtle stripe effect */
+[b-nm6lnvb7ii] tr:nth-child(even) {
+    background: rgba(198,212,222,0.5) !important;
+}
+
+div.grid[b-nm6lnvb7ii] {
+    height: 100%;
+    overflow-y: auto;
+}
+
+div.container[b-nm6lnvb7ii] {
+    height: 68.8%;
+    border-radius: 1rem;
+    width: 80%;
+    background: white;
+    padding: .75rem 0 1rem 1rem;
+    background: white;
+    overflow-y: hidden;
+}
+
+
+
+
+/* Sticky header while scrolling */
+[b-nm6lnvb7ii] thead {
+    position: sticky;
+    top: 0;
+    background-color: var(--brand-white);
+    outline: 1px solid gray;
+    z-index: 1;
+}
+
+
+
+.paginator-container[b-nm6lnvb7ii] {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background-color: var(--brand-white);
+}
+
+
+.paginator-content[b-nm6lnvb7ii] {
+    position: relative;
+}
+
+.page-size-chooser[b-nm6lnvb7ii] {
+    position: absolute;
+    left: 6rem;
+    bottom: 0.45rem;
+}
+
+
+/* For WebKit browsers like Chrome and Safari */
+[b-nm6lnvb7ii]::-webkit-scrollbar {
+    width: 10px;
+}
+
+[b-nm6lnvb7ii]::-webkit-scrollbar-thumb {
+    background-color: rgb(6 21 31 / 5%);
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+[b-nm6lnvb7ii]::-webkit-scrollbar-track {
+    background-color: var(--plain-white);
+    box-shadow: none;
+}
+
+
+/* Magnifying glass */
+[b-nm6lnvb7ii] .user-name .col-options-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
+    margin-right:.5rem;
 }
 /* _content/TescatGlobalServer/Components/Pages/Users/AddUserPage.razor.rz.scp.css */
 /* _content/TescatGlobalServer/Components/Pages/Users/UserCard.razor.rz.scp.css */
