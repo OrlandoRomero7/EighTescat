@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Id5wlT5SU26biM4TTWQgp+802li0vlHEf3fCcMdfWUA=",
+  "Hash": "Btc0z+31XmuLHv7JuWPiLrI+lxwFcrMaBliwmaGiHCc=",
   "Source": "TescatGlobalServer",
   "BasePath": "_content/TescatGlobalServer",
   "Mode": "Default",
@@ -262,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\405.png"
+    },
+    {
+      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\58.jpg",
+      "SourceId": "TescatGlobalServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "BasePath": "_content/TescatGlobalServer",
+      "RelativePath": "Images/58.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\58.jpg"
     },
     {
       "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\default.svg",
