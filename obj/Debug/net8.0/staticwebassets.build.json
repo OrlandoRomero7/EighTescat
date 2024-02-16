@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Btc0z+31XmuLHv7JuWPiLrI+lxwFcrMaBliwmaGiHCc=",
+  "Hash": "PQykglLcZ3zf1F8GFF45GqR5qyYZnpVRjJhDXiidmDA=",
   "Source": "TescatGlobalServer",
   "BasePath": "_content/TescatGlobalServer",
   "Mode": "Default",
@@ -10,17 +10,55 @@
     {
       "Name": "TescatGlobalServer\\wwwroot",
       "Source": "TescatGlobalServer",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\medin\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
+      "Identity": "C:\\Users\\Orlando\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\contentFiles\\any\\netstandard2.1\\wwwroot\\ChartJsBlazorInterop.js",
+      "SourceId": "TescatGlobalServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
+      "BasePath": "_content/TescatGlobalServer",
+      "RelativePath": "ChartJsBlazorInterop.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Orlando\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\contentFiles\\any\\netstandard2.1\\wwwroot\\ChartJsBlazorInterop.js"
+    },
+    {
+      "Identity": "C:\\Users\\Orlando\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\staticwebassets\\ChartJsBlazorInterop.js",
+      "SourceId": "ChartJs.Blazor.Fork",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\Orlando\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\staticwebassets\\",
+      "BasePath": "_content/ChartJs.Blazor.Fork",
+      "RelativePath": "ChartJsBlazorInterop.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Orlando\\.nuget\\packages\\chartjs.blazor.fork\\2.0.2\\staticwebassets\\ChartJsBlazorInterop.js"
+    },
+    {
+      "Identity": "C:\\Users\\Orlando\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\medin\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Orlando\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "AssetKind": "All",
@@ -33,13 +71,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\medin\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Orlando\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\medin\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\QuickGrid.razor.js",
+      "Identity": "C:\\Users\\Orlando\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\QuickGrid.razor.js",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\medin\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Orlando\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "QuickGrid.razor.js",
       "AssetKind": "All",
@@ -52,13 +90,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\medin\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\QuickGrid.razor.js"
+      "OriginalItemSpec": "C:\\Users\\Orlando\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.1\\staticwebassets\\QuickGrid.razor.js"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\bundle\\TescatGlobalServer.styles.css",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\bundle\\TescatGlobalServer.styles.css",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "TescatGlobalServer.styles.css",
       "AssetKind": "All",
@@ -71,13 +109,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\medin\\Projects\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\bundle\\TescatGlobalServer.styles.css"
+      "OriginalItemSpec": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\bundle\\TescatGlobalServer.styles.css"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\TescatGlobalServer.bundle.scp.css",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\TescatGlobalServer.bundle.scp.css",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "TescatGlobalServer.bundle.scp.css",
       "AssetKind": "All",
@@ -90,13 +128,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\medin\\Projects\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\TescatGlobalServer.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\TescatGlobalServer.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\app.css",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -112,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -131,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -150,10 +188,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\favicon.png",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -169,10 +207,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\11.png",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\11.png",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "Images/11.png",
       "AssetKind": "All",
@@ -188,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\Images\\11.png"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\152.png",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\152.png",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "Images/152.png",
       "AssetKind": "All",
@@ -207,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\Images\\152.png"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\177.jpg",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\177.jpg",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "Images/177.jpg",
       "AssetKind": "All",
@@ -226,10 +264,10 @@
       "OriginalItemSpec": "wwwroot\\Images\\177.jpg"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\32.png",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\32.png",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "Images/32.png",
       "AssetKind": "All",
@@ -245,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\Images\\32.png"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\405.png",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\405.png",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "Images/405.png",
       "AssetKind": "All",
@@ -264,10 +302,10 @@
       "OriginalItemSpec": "wwwroot\\Images\\405.png"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\58.jpg",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\58.jpg",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "Images/58.jpg",
       "AssetKind": "All",
@@ -283,10 +321,10 @@
       "OriginalItemSpec": "wwwroot\\Images\\58.jpg"
     },
     {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\default.svg",
+      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\default.svg",
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
       "BasePath": "_content/TescatGlobalServer",
       "RelativePath": "Images/default.svg",
       "AssetKind": "All",

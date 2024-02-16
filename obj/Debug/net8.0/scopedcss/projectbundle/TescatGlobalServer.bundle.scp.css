@@ -417,6 +417,47 @@ div.container[b-nm6lnvb7ii] {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
     margin-right: .5rem;
 }
+/* _content/TescatGlobalServer/Components/Pages/Home/HomeCard.razor.rz.scp.css */
+.card[b-nyyhe3ppuf] {
+    background-color: var(--brand-white);
+}
+
+.home-card[b-nyyhe3ppuf] {
+    color:var(--brand-text);
+    width: 38%;
+    border-radius: 0.75rem;
+    margin-bottom: 6rem;
+    margin-right: 6rem;
+}
+
+.card-layout[b-nyyhe3ppuf] {
+    padding-top: 1rem;
+ /*   padding-bottom: 1rem;*/
+}
+
+h5.card-title[b-nyyhe3ppuf] {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.card-content[b-nyyhe3ppuf] {
+    height: 8rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.home-card-icon[b-nyyhe3ppuf] {
+    text-align: center;
+    width: 4rem;
+    height: 4rem;
+    padding-top: 1.125rem;
+    margin-top: -2rem;
+    margin-left: 1rem;
+    color: var(--brand-white);
+    background: linear-gradient(195deg, rgb(66, 170, 240), rgb(17, 129, 205));
+    border-radius: 0.75rem;
+    /*    border: 1px solid red;*/
+}
 /* _content/TescatGlobalServer/Components/Pages/Users/AddUserPage.razor.rz.scp.css */
 /* _content/TescatGlobalServer/Components/Pages/Users/UserCard.razor.rz.scp.css */
 h5.card-title[b-j3jz0rm3d0] {
