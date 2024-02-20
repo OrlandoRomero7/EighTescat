@@ -1,0 +1,234 @@
+﻿@page "/"
+@using ChartJs.Blazor.PieChart
+@using Newtonsoft.Json.Linq
+@inject IJSRuntime JS
+@* @inject IMemoryRamService MemoryRamService
+@inject IStorageService StorageService
+@inject IPcService PcService *@
+@inject NavigationManager NavigationManager
+
+<PageTitle>Inicio - Tescat Software</PageTitle>
+
+<div style="padding: 0 5rem">
+
+    <h1 style="padding-left: 1px; margin:3rem 0 2.75rem .25rem; font-size:2rem;">Estado De Equipos</h1>
+
+    <div style="display:flex;  flex-wrap: wrap; margin-top:4rem">
+
+        <HomeCard Title="" CardIcon="bi bi-hdd">
+            <Chart Config="_pieConfig"></Chart>
+        </HomeCard>
+
+        <HomeCard Title="" CardIcon="bi bi-memory">
+            kk
+        </HomeCard> 
+
+        <HomeCard Title="Bandejas de Entrada" CardMaterialIcon="stacked_inbox">
+            Estado de los archivos de correo
+        </HomeCard>
+
+        <HomeCard Title="SSD's TBW" CardMaterialIcon="save_as">
+            Alto numero de escrituras en discos
+        </HomeCard>
+
+    </div>
+
+</div>
+
+
+@code {
+    // public List<PcWithTotalRam> pcRam { get; set; }
+    // public List<PcWithAvailableStrge> pcStorage { get; set; }
+    // Creamos una lista para almacenar los objetos DataItem
+    // List<DataItem> dataList = new List<DataItem>();
+    private PieConfig _pieConfig;
+    // private PieConfig _doughtConfig;
+    DataItem[] pieStorage;
+
+    // LogicalFilterOperator logicalFilterOperator = LogicalFilterOperator.And;
+    // FilterCaseSensitivity filterCaseSensitivity = FilterCaseSensitivity.CaseInsensitive;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // pcRam = await MemoryRamService.GetMemoryRamsFromHomePage();
+        // pcStorage = await StorageService.GetAvailableStrgeFromHomePage();
+
+        // int pc50 = pcStorage.Where(item => item.AvailableStorage <= 50).Count();
+        // int pc50_100 = pcStorage.Where(item => item.AvailableStorage > 50 && item.AvailableStorage < 100).Count();
+        // int pc100 = pcStorage.Where(item => item.AvailableStorage > 100).Count();
+
+
+        int pc50 = 5;
+        int pc50_100 = 8;
+        int pc100 = 10;
+
+        pieStorage = new DataItem[] {
+        new DataItem
+        {
+            Category = "-50GB",
+            AvailableStorage = pc50
+        },
+        new DataItem
+        {
+            Category = "50-100GB",
+            AvailableStorage = pc50_100
+        },
+        new DataItem
+        {
+            Category = "+100GB",
+            AvailableStorage = pc100
+        }
+    };
+
+        // Crear una nueva lista de objetos que contengan solo los datos filtrados
+        // DataItem item1 = new DataItem { Category = "Equipos < 50", AvailableStorage = pc50 };
+        // dataList.Add(item1);
+
+        // DataItem item2 = new DataItem { Category = "Equipos 50 - 100", AvailableStorage = pc50_100 };
+        // dataList.Add(item2);
+
+        // DataItem item3 = new DataItem { Category = "Equipos > 100 ", AvailableStorage = pc100 };
+        // dataList.Add(item3);
+
+        // newItems.Add(new DataItem
+        //     {
+        //         Quarter = "menos de 27", // Ajusta esto según la propiedad de tu objeto Pc que contenga el cuatrimestre
+        //         Revenue = menor27 // Usa la propiedad AvailableStorage para la cantidad de Revenue
+        //     });
+        // newItems.Add(new DataItem
+        //     {
+        //         Quarter = "mayor de 28", // Ajusta esto según la propiedad de tu objeto Pc que contenga el cuatrimestre
+        //         Revenue = mayor28 // Usa la propiedad AvailableStorage para la cantidad de Revenue
+        //     });
+
+        // Agregar todos los nuevos elementos a la lista newDataItemList
+        //newDataItemList.AddRange(newItems);
+        StartPieChart(pc50, pc50_100, pc100);
+        //StartDoughnutChart(pc50, pc50_100, pc100);
+
+    }
+    bool showDataLabels = false;
+
+    // void OnSeriesClick(SeriesClickEventArgs args)
+    // {
+    //     var category = args.Category.ToString();
+    //     NavigationManager.NavigateTo("/devices/availablestorage/" + category);
+    // }
+
+    // class DataItem2
+    // {
+    //     public string Quarter { get; set; }
+    //     public double Revenue { get; set; }
+    // }
+
+
+    public void NavigateToPc(Guid Guid)
+    {
+        NavigationManager.NavigateTo("/pcDetails/" + Guid);
+    }
+    //bool showDataLabels = false;
+
+    // void OnSeriesClick(SeriesClickEventArgs args)
+    // {
+    //     Console.WriteLine(args);
+    // }
+    class DataItem
+    {
+        public string Category { get; set; }
+        public int AvailableStorage { get; set; }
+    }
+    // Método de manejo de eventos
+    public async Task HandleChartClick(MouseEventArgs args)
+    {
+        // Aquí puedes agregar la lógica que deseas ejecutar cuando se haga clic en el gráfico
+        // Por ejemplo, mostrar un mensaje
+        await JS.InvokeVoidAsync("alert", "¡Se hizo clic en el gráfico!");
+    }
+    public void StartPieChart(int pc50, int pc50_100, int pc100)
+    {
+        _pieConfig = new PieConfig();
+        _pieConfig.Options = new PieOptions
+            {
+                Responsive = true,
+                // Title = new OptionsTitle
+                // {
+                //     Display = true,
+                //     Text = "Almacenamiento Disponible"
+                // }
+
+                OnClick = new DelegateHandler<ChartMouseEvent>(OnClickHandler),
+                Legend = new ChartJs.Blazor.Common.Legend
+                {
+                    Position = Position.Right
+                }
+                };
+
+        foreach (var color in new[] { "-50GB", "50-100GB", "+100GB" })
+        {
+            _pieConfig.Data.Labels.Add(color);
+        }
+        PieDataset<int> dataset = new PieDataset<int>(new[] { pc50, pc50_100, pc100 })
+            {
+                BackgroundColor = new[]
+                            {
+            ColorUtil.ColorHexString(255, 0, 0), // Slice 1 aka "Red"
+            ColorUtil.ColorHexString(255, 155, 0), // Slice 2 aka "Yellow"
+            ColorUtil.ColorHexString(49, 147, 225), // Slice 3 aka "Green"
+            // ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+        }
+            };
+
+        _pieConfig.Data.Datasets.Add(dataset);
+
+    }
+    // public void StartDoughnutChart(int pc50, int pc50_100, int pc100)
+    // {
+    //     _doughtConfig = new PieConfig(useDoughnutType: true);
+    //     _doughtConfig.Options = new PieOptions()
+    //         {
+
+    //             Responsive = true,
+    //             Title = new OptionsTitle
+    //             {
+    //                 Display = true,
+    //                 Text = "Grafica de dona"
+    //             },
+
+    //         };
+
+
+    //     foreach (var color in new[] { "-50GB", "50-100GB", "+100GB" })
+    //     {
+    //         _doughtConfig.Data.Labels.Add(color);
+    //     }
+    //     PieDataset<int> dataset = new PieDataset<int>(new[] { pc50, pc50_100, pc100 })
+    //         {
+    //             BackgroundColor = new[]
+    //                         {
+    //         ColorUtil.ColorHexString(255, 0, 0), // Slice 1 aka "Red"
+    //         ColorUtil.ColorHexString(255, 155, 0), // Slice 2 aka "Yellow"
+    //         ColorUtil.ColorHexString(49, 147, 225), // Slice 3 aka "Green"
+    //         // ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+    //     }
+    //         };
+
+    //     _doughtConfig.Data.Datasets.Add(dataset);
+
+    // }
+    public void OnClickHandler(JObject mouseEvent, JArray activeElements)
+    {
+        foreach (JObject elem in activeElements)
+        {
+            foreach (JProperty prop in elem.GetValue("_model"))
+            {
+                if (prop.Name.Equals("label"))
+                {
+                    NavigationManager.NavigateTo("/devices/availablestorage/" + prop.Value.ToString());
+                    // Console.WriteLine(prop.Value.ToString());
+                }
+            }
+        }
+    }
+    
+
+}
