@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Components\favicon.png" />
     <Content Include="Components\Pages\Computers\ComputersHomePage.razor.css" />
   </ItemGroup>
 

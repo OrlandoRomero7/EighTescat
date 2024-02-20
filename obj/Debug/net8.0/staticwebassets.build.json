@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Btc0z+31XmuLHv7JuWPiLrI+lxwFcrMaBliwmaGiHCc=",
+  "Hash": "lDsuASOspJEWhjekpo7muZ0CetsdAFycIJr32+CQleU=",
   "Source": "TescatGlobalServer",
   "BasePath": "_content/TescatGlobalServer",
   "Mode": "Default",
@@ -148,25 +148,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
-    },
-    {
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\favicon.png",
-      "SourceId": "TescatGlobalServer",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\",
-      "BasePath": "_content/TescatGlobalServer",
-      "RelativePath": "favicon.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
       "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\11.png",

@@ -8,8 +8,8 @@
     --brand-white: #FBFCFE;
     --plain-white: #FFFFFF;
     --brand-secondary: #137019;
+    --brand-red: #137019;
 }
-
 
 html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;

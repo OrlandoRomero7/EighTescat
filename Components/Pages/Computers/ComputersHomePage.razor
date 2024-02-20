@@ -8,35 +8,62 @@
 
 
 <div class="container shadow">
+
+    <div class="grid-controlers-header">
+
+
+        <div class="grid-controlers-header-left @computerStatusStyles">
+            <button @onclick="ShowStatus">
+                Todos
+            </button>
+            <span class="bi bi-plus"></span>
+
+        </div>
+
+
+
+    </div>
+
     <div class="grid ">
         <QuickGrid Items="@computersData" Theme="tescat" Pagination="@pagination">
 
-            <PropertyColumn Align=Align.Left Property="@(c => c.PC_NAME)" Sortable="true" Title="Nombre del Equipo" />
 
+            @if (computerStatusCircles)
+            {
+                <TemplateColumn Title="" Align="Align.Center" SortBy="@sortUserId" Class="first-column status">
+                    <svg width='20' height='20'>
+                        <circle cx='10' cy='10' r='7.5' fill='@(computerStatusColor(context.ID_USER))' />
+                    </svg>
+                </TemplateColumn>
+            }
 
-
-
-            <PropertyColumn Align=Align.Left Property="@(c => c.LAST_MAINT)" Format="dd-MM-yyyy" Sortable="true" Title="Fecha del Ultimo Mantenimiento" />
-
-
-            <PropertyColumn Align="Align.Left" Property="@(c => ComputerUser(c.ID_USER))" Sortable="true" Title="Usuario" Class="user-name">
-
-
+            <PropertyColumn Align=Align.Left Property="@(c => c.PC_NAME)" Sortable="true" Title="Equipo" Class="first-column">
                 <ColumnOptions>
                     <div class="search-box">
-                        <input type="search" autofocus @bind="nameFilter" @bind:event="oninput" placeholder="User..." />
+                        <input type="search" autofocus @bind="computerNameFilter" @bind:event="oninput" />
+                    </div>c
+                </ColumnOptions>
+            </PropertyColumn>
+
+
+            <PropertyColumn Align=Align.Left Property="@(c => LongDateFormat(c.LAST_MAINT))" Sortable="true" Title="Ultimo Mantenimiento" Class="mantt-date" />
+
+
+            <PropertyColumn Align="Align.Center" Property="@(c => ComputerUser(c.ID_USER))" Sortable="true" Title="Usuario" Class="user-name" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Descending">
+                <ColumnOptions>
+                    <div class="search-box">
+                        <input type="search" autofocus @bind="userNameFilter" @bind:event="oninput" />
                     </div>
                 </ColumnOptions>
-
             </PropertyColumn>
 
 
             <PropertyColumn Align=Align.Center Property="@(c => c.PC_TYPE)" Sortable="true" Title="Tipo" />
 
 
-            <PropertyColumn Align=Align.Left Property="@(c => ComputerOffice(c.ID_USER))" Sortable="true" Title="Oficina" />
+            <PropertyColumn Align=Align.Center Property="@(c => ComputerOffice(c.ID_USER))" Sortable="true" Title="Oficina" />
 
-            <PropertyColumn Align=Align.Left Property="@(c => ComputerAnyDeskID(c.ID_PC))" Sortable="true" Title="ID Anydesk" />
+            <PropertyColumn Align=Align.Center Property="@(c => ComputerAnyDeskID(c.ID_PC))" Sortable="true" Title="ID Anydesk" />
 
 
             @*
@@ -80,6 +107,9 @@
 
 </div>
 
+@* <a href="anydesk:340271832">340 271 832</a>
+
+ *@
 @code {
 
     IQueryable<UserPC>? allComputersList { get; set; }
@@ -90,11 +120,11 @@
     private List<User>? Users { get; set; }
     private List<ComputerCredentials>? Credentials { get; set; }
 
-    string? nameFilter;
+    string? computerNameFilter;
+    string? userNameFilter;
 
-
-
-
+    bool computerStatusCircles = false;
+    string? computerStatusStyles;
 
 
 
@@ -104,15 +134,69 @@
         {
             var result = allComputersList;
 
-            if (!string.IsNullOrEmpty(nameFilter))
+            // displaying just active users
+            result = (result != null && !computerStatusCircles) ? result.Where(c => c.ID_USER != null && c.ID_USER != 0) : result;
+
+            if (!string.IsNullOrEmpty(userNameFilter))
             {
                 result = result.Where(c =>
-                ComputerUser(c.ID_USER).Contains(nameFilter, StringComparison.CurrentCultureIgnoreCase));
+                ComputerUser(c.ID_USER).Contains(userNameFilter, StringComparison.CurrentCultureIgnoreCase));
             }
 
-
+            if (!string.IsNullOrEmpty(computerNameFilter))
+            {
+                result = result.Where(c =>
+               c.PC_NAME.Contains(computerNameFilter,
+                   StringComparison.CurrentCultureIgnoreCase));
+            }
 
             return result;
+        }
+    }
+
+
+
+    GridSort<UserPC> sortUserId = GridSort<UserPC>
+       .ByAscending(p => p.ID_USER)
+       .ThenDescending(p => p.ID_USER);
+
+    private void ShowStatus()
+    {
+        computerStatusCircles = !computerStatusCircles;
+        if (!computerStatusCircles)
+        {
+            computerStatusStyles = "disabled";
+        }
+        else
+        {
+            computerStatusStyles = "enabled";
+        }
+
+    }
+
+
+    string computerStatusColor(int? userId)
+    {
+        return userId.HasValue ? "#3ba28f" : "#e32044";
+    }
+
+
+
+
+    string LongDateFormat(DateTime? date)
+    {
+        if (date.HasValue)
+        {
+            CultureInfo culture = new CultureInfo("es-MX");
+            TextInfo textInfo = culture.TextInfo;
+
+            string formattedDate = date.Value.ToString("dd MMMM yyyy", culture);
+
+            return textInfo.ToTitleCase(formattedDate);
+        }
+        else
+        {
+            return string.Empty;
         }
     }
 
@@ -126,7 +210,7 @@
             return user?.NAME ?? "INACTIVO";
         }
 
-        return "INACTIVO";
+        return "";
     }
 
 

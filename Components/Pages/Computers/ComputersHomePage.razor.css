@@ -13,24 +13,146 @@
         /*   color: blue !important;*/
     }
 
-    ::deep .quickgrid[theme=tescat] button.col-title:hover, ::deep .quickgrid[theme=tescat] .col-options-button:hover {
+  /*  ::deep .quickgrid[theme=tescat] button.col-title:hover, ::deep .quickgrid[theme=tescat] .col-options-button:hover {
         background-color: var(--brand);
-    }
+    }*/
 
-    ::deep .quickgrid[theme=tescat] button.col-title:active, ::deep .quickgrid[theme=tescat] .col-options-button:active {
+  /*  ::deep .quickgrid[theme=tescat] button.col-title:active, ::deep .quickgrid[theme=tescat] .col-options-button:active {
         background-color: var(--brand-hover);
-    }
+    }*/
+
+::deep th {
+    width: 13rem;
+    max-width: 19rem;
+}
+
+::deep td {
+    width: 13rem;
+    max-width: 19rem;
+}
 
 ::deep tr {
     height: 4rem;
+    border-bottom: 1px solid rgb(6 21 31 / .25); /* --brand-text in rgb values with opacity at 25%;*/
 }
 
-    /* Subtle stripe effect */
-    ::deep tr:nth-child(even) {
+
+
+/* Magnifying glass */
+::deep .user-name .col-options-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
+    margin-right: .5rem;
+}
+
+::deep .first-column .col-options-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
+    margin-right: .5rem;
+}
+
+
+::deep thead > tr:first-child {
+    height: 1rem !important;
+    outline: 1px solid rgb(6 21 31 / .25);
+    border-bottom: 1px solid transparent;
+}
+
+::deep thead:after {
+    background: red;
+}
+
+/* Subtle stripe effect */
+/*    ::deep tr:nth-child(even) {
         background: rgba(198,212,222,0.5) !important;
+    }*/
+
+::deep td.first-column {
+    padding-left: 16px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .15px;
+    width: 25px;
+}
+
+::deep th.first-column {
+    padding-left: 16px;
+    font-weight: 700;
+    width: 25px;
+}
+
+/*    computer status header content*/
+/*::deep th.first-column.status .col-header-content {
+        background: rgba(6 21 31 / .25);*/ /* --brand-text in rgb values with opacity at 65%;*/
+/*border-radius: 50%;
+        width: 20px;
+  
+    }*/
+
+@media (min-width: 959px) {
+    ::deep td.first-column {
+        font-size: 16px;
+    }
+}
+
+
+::deep td.mantt-date {
+    letter-spacing: 1.5px;
+    font-size: 14px;
+    padding-left: 2px
+}
+
+@media (min-width: 959px) {
+    ::deep td.mantt-date {
+        font-size: 15px;
+    }
+}
+
+.grid-controlers-header {
+    height: 3rem;
+    border-bottom: 1px solid rgb(6 1 31 / .25);
+    display: flex;
+    align-items: center;
+    padding: 26px 16px;
+}
+
+
+
+.grid-controlers-header-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 6.25rem;
+}
+
+    .grid-controlers-header-left span {
+        font-size: 2rem;
+        font-weight: 500;
     }
 
-div.grid {
+    .grid-controlers-header-left button {
+        /* default styles for the button*/
+        color: #3ba28f;
+        background: rgb(19 112 25 / .125); /* --brand-secondary in rgb values with opacity at .125%;*/
+        border: 0px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 6px 10px;
+    }
+
+
+    .grid-controlers-header-left.enabled button {
+        color: #e32044;
+        background: rgb(204 2 56 / .125); /* --brand-red in rgb values with opacity at .125%;*/
+    }
+
+    .grid-controlers-header-left.disabled button {
+        color: #3ba28f;
+        background: rgb(19 112 25 / .125); /* --brand-secondary in rgb values with opacity at .125%;*/
+    }
+
+
+
+div .grid {
     height: 94%;
     overflow-y: auto;
 }
@@ -39,38 +161,57 @@ div.container {
     max-height: 45rem;
     height: 45rem;
     /*max-height: 85%;*/
-    border-radius: 1rem;
-    width: 80%;
+    border-radius: 8px;
+    width: 91%;
     background: white;
     padding: .75rem 0 1rem 1rem;
     background: white;
     overflow-y: hidden;
+    padding: 0px;
 }
 
-
+@media (min-width: 1620px) {
+    div.container {
+        width: 100%;
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+}
 
 
 /* Sticky header while scrolling */
 ::deep thead {
     position: sticky;
     top: 0;
-    background-color: var(--brand-white);
-    outline: 1px solid gray;
-    z-index: 1;
+    background-color: #F9FBFC;
+    font-size: 14px;
+    font-weight: 600;
+    /*    outline: 1px solid gray;*/
 }
 
+    ::deep thead .col-title-text {
+        color: rgba(6 21 31 / .65); /* --brand-text in rgb values with opacity at 65%;*/
+        text-transform: capitalize;
+    }
 
 
 .paginator-container {
     position: sticky;
     bottom: 0;
     z-index: 1;
-    background-color: var(--brand-white);
+    background-color: #F9FBFC;
 }
 
 
 .paginator-content {
     position: relative;
+}
+
+
+
+::deep .paginator {
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .page-size-chooser {
@@ -80,9 +221,13 @@ div.container {
 }
 
 
+::deep .col-header-content {
+    padding: 10px 0px;
+}
+
 /* For WebKit browsers like Chrome and Safari */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -92,11 +237,19 @@ div.container {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--plain-white);
+    background-color: transparent;
     box-shadow: none;
+    /*  margin-top: 65px;*/
+    margin-top: 26px;
 }
 
 
+.activeStatus {
+    border: 1px solid yellow;
+}
+
+
+/*
 
 ::-webkit-scrollbar-button {
     width: 20px;
@@ -107,10 +260,5 @@ div.container {
     ::-webkit-scrollbar-button:vertical:increment {
         background: white;
     }
+*/
 
-
-/* Magnifying glass */
-::deep .user-name .col-options-button {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
-    margin-right: .5rem;
-}
