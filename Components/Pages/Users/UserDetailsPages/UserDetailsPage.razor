@@ -1,5 +1,6 @@
 ﻿@page "/users/details"
 @page "/users/details/{UserDbId:int}"
+@using TescatGlobalServer.Helpers
 
 
 
@@ -129,7 +130,7 @@ else
                 Emails = new UserEmails();
             }
 
-         
+
 
 
 
@@ -219,12 +220,16 @@ else
             //aqui se mandan a actualizar los datos
 
             context.Update(updatedCredentials);
+            updatedEmails.PASS_1 = !string.IsNullOrEmpty(updatedEmails.PASS_1) ? AlgorithmAES.EncryptString(updatedEmails.PASS_1) : null;
+            updatedEmails.PASS_2 = !string.IsNullOrEmpty(updatedEmails.PASS_2) ? AlgorithmAES.EncryptString(updatedEmails.PASS_2) : null;
+            updatedEmails.PASS_3 = !string.IsNullOrEmpty(updatedEmails.PASS_3) ? AlgorithmAES.EncryptString(updatedEmails.PASS_3) : null;
             context.Update(updatedEmails);
 
             context.Update(updatedUser);
         }
 
         await context.SaveChangesAsync();
+        //StateHasChanged();
         return updatedUser;
     }
 

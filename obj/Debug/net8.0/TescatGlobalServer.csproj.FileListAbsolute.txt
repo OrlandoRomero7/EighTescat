@@ -318,6 +318,7 @@ C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\TescatGlobalServe
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\TescatGlobalServer.pdb
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\ChartJs.Blazor.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Humanizer.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
@@ -357,6 +358,7 @@ C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Microsoft.JSInter
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\System.CodeDom.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\System.Composition.AttributedModel.dll
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\System.Composition.Convention.dll
@@ -452,6 +454,7 @@ C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\staticwebassets.p
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Layout\MainModal.razor.rz.scp.css
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
+C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Pages\Home\HomeCard.razor.rz.scp.css
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Pages\Users\AddUserPage.razor.rz.scp.css
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Pages\Users\UserCard.razor.rz.scp.css
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Pages\Users\UserHomePage.razor.rz.scp.css
@@ -468,6 +471,3 @@ C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\refint\TescatGlob
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\TescatGlobalServer.pdb
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\TescatGlobalServer.genruntimeconfig.cache
 C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\ref\TescatGlobalServer.dll
-C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\ChartJs.Blazor.dll
-C:\Users\Orlando\Desktop\Proyectos\EighTescat\bin\Debug\net8.0\Newtonsoft.Json.dll
-C:\Users\Orlando\Desktop\Proyectos\EighTescat\obj\Debug\net8.0\scopedcss\Components\Pages\Home\HomeCard.razor.rz.scp.css

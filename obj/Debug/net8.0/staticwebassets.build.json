@@ -1,10 +1,6 @@
 {
   "Version": 1,
-<<<<<<< HEAD
-  "Hash": "lDsuASOspJEWhjekpo7muZ0CetsdAFycIJr32+CQleU=",
-=======
-  "Hash": "PQykglLcZ3zf1F8GFF45GqR5qyYZnpVRjJhDXiidmDA=",
->>>>>>> 7d3aa19f94fc9480993fa7cc65934c5c23d01517
+  "Hash": "uyhZZ4NpnGi5/kIxq8hnNr8ejqJw9wL9VzPnWSmL39o=",
   "Source": "TescatGlobalServer",
   "BasePath": "_content/TescatGlobalServer",
   "Mode": "Default",
@@ -192,30 +188,7 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\medin\\Projects\\EighTescat\\wwwroot\\Images\\11.png",
-=======
-      "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\favicon.png",
-      "SourceId": "TescatGlobalServer",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",
-      "BasePath": "_content/TescatGlobalServer",
-      "RelativePath": "favicon.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.png"
-    },
-    {
       "Identity": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\Images\\11.png",
->>>>>>> 7d3aa19f94fc9480993fa7cc65934c5c23d01517
       "SourceId": "TescatGlobalServer",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\",

@@ -49,13 +49,6 @@
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-<<<<<<< HEAD
-=======
-      "Id": "C:\\Users\\Orlando\\Desktop\\Proyectos\\EighTescat\\wwwroot\\favicon.png",
-      "PackagePath": "staticwebassets\\favicon.png"
-    },
-    {
->>>>>>> 7d3aa19f94fc9480993fa7cc65934c5c23d01517
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TescatGlobalServer.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
