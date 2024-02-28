@@ -16,12 +16,19 @@
     <div style="display:flex;  flex-wrap: wrap; margin-top:4rem">
 
         <HomeCard Title="" CardIcon="bi bi-hdd">
-            <Chart Config="_pieConfig"></Chart>
+            @if (!nullStorage)
+            {
+                <Chart Config="_pieConfig"></Chart>
+            }
+
         </HomeCard>
 
         <HomeCard Title="" CardIcon="bi bi-memory">
-            kk
-        </HomeCard> 
+            @if(!nullRAM){
+                <Chart Config="_doughtConfig"></Chart>
+            }
+            
+        </HomeCard>
 
         <HomeCard Title="Bandejas de Entrada" CardMaterialIcon="stacked_inbox">
             Estado de los archivos de correo
@@ -37,114 +44,126 @@
 
 
 @code {
-    // public List<PcWithTotalRam> pcRam { get; set; }
-    // public List<PcWithAvailableStrge> pcStorage { get; set; }
-    // Creamos una lista para almacenar los objetos DataItem
-    // List<DataItem> dataList = new List<DataItem>();
     private PieConfig _pieConfig;
-    // private PieConfig _doughtConfig;
-    DataItem[] pieStorage;
+    private PieConfig _doughtConfig;
+    //DataItem[] pieStorage;
 
-    // LogicalFilterOperator logicalFilterOperator = LogicalFilterOperator.And;
-    // FilterCaseSensitivity filterCaseSensitivity = FilterCaseSensitivity.CaseInsensitive;
+    private bool nullStorage = true;
+    private bool nullRAM = true;
+
+    //menos de 15 %
+    int storage15 = 0;
+    //menos de 40 %
+    int storage11_40 = 0;
+    //los restantes
+    int storage40 = 0;
+
+    //8 o menos de ram
+    int ram8 = 0;
+    // 12 de ram
+    int ram12 = 0;
+    // mas de 12 ram
+    int ram16 = 0;
+
+
 
     protected override async Task OnInitializedAsync()
     {
-        // pcRam = await MemoryRamService.GetMemoryRamsFromHomePage();
-        // pcStorage = await StorageService.GetAvailableStrgeFromHomePage();
+        using var context = ContextFactory.CreateDbContext();
+        //Se consulta para sacar el porcentaje por disco, no por pc. Y lo que sale en el chart es la cantidad de discos que tienen ese porcentaje
+        var AllStorage = await context.Storage
+             .Where(pc => pc.AVAILABLE_STRGE != null && pc.TOTAL_STRGE != null && pc.AVAILABLE_STRGE != 0 && pc.TOTAL_STRGE != 0)
+            .Select(pc => new
+            {
+                // pc.MODEL,
+                // pc.AVAILABLE_STRGE,
+                // pc.USED_STRGE,
+                // pc.TOTAL_STRGE,
+                Percentage = (pc.AVAILABLE_STRGE * 100) / pc.TOTAL_STRGE
+            })
+            .ToListAsync();
 
-        // int pc50 = pcStorage.Where(item => item.AvailableStorage <= 50).Count();
-        // int pc50_100 = pcStorage.Where(item => item.AvailableStorage > 50 && item.AvailableStorage < 100).Count();
-        // int pc100 = pcStorage.Where(item => item.AvailableStorage > 100).Count();
-
-
-        int pc50 = 5;
-        int pc50_100 = 8;
-        int pc100 = 10;
-
-        pieStorage = new DataItem[] {
-        new DataItem
+        //Obtenida la consulta se divide por grupos de porcentaje y se pone en false nullStorage para renderizar la grafica.
+        if (AllStorage is not null)
         {
-            Category = "-50GB",
-            AvailableStorage = pc50
-        },
-        new DataItem
-        {
-            Category = "50-100GB",
-            AvailableStorage = pc50_100
-        },
-        new DataItem
-        {
-            Category = "+100GB",
-            AvailableStorage = pc100
+            foreach (var storageItem in AllStorage)
+            {
+                if (storageItem.Percentage <= 15) storage15++;
+                else if (storageItem.Percentage <= 40) storage11_40++;
+                else storage40++;
+            }
+            nullStorage = false;
         }
-    };
 
-        // Crear una nueva lista de objetos que contengan solo los datos filtrados
-        // DataItem item1 = new DataItem { Category = "Equipos < 50", AvailableStorage = pc50 };
-        // dataList.Add(item1);
+        //var pcsWithTotalRam = await context.PC.Where(pc => pc.MemoryRams.Any(ram => ram.Size != null && ram.Size > 0) && pc.MemoryRams.Sum(ram => ram.SIZE ?? 0) <= 8)
+        // var pcsWithTotalRam = await context.PC
+        //     .Where(pc => pc.MemoryRams.Any(ram => ram.SIZE != null && ram.SIZE > 0) && pc.MemoryRams.Sum(ram => ram.SIZE ?? 0) <= 8)
+        //     .Select(pc => new 
+        //         {
+        //             TotalRamCapacity = pc.MemoryRams.Sum(ram => ram.SIZE ?? 0)
+        //         })
+        //     .OrderBy(pcWithRam => pcWithRam.TotalRamCapacity)
+        //     .ToListAsync();
 
-        // DataItem item2 = new DataItem { Category = "Equipos 50 - 100", AvailableStorage = pc50_100 };
-        // dataList.Add(item2);
+        var allRam = await context.Memory_RAM.Where(ram => ram.SIZE <= 8).ToListAsync();
+        Console.WriteLine(allRam.Count());
 
-        // DataItem item3 = new DataItem { Category = "Equipos > 100 ", AvailableStorage = pc100 };
-        // dataList.Add(item3);
+        // var pcsWithTotalRam = await context.PC
+        //     .Where(pc => pc.MemoryRams.Any(ram => ram.SIZE != null && ram.SIZE > 0))
+        //     .Select(pc => new
+        //         {
+        //             TotalRamCapacity = pc.MemoryRams.Sum(ram => ram.SIZE ?? 0)
+        //         })
+        //     .OrderBy(pcWithRam => pcWithRam.TotalRamCapacity)
+        //     .ToListAsync();
 
-        // newItems.Add(new DataItem
+        // if (pcsWithTotalRam is not null)
+        // {
+        //     foreach (var ramItem in pcsWithTotalRam)
         //     {
-        //         Quarter = "menos de 27", // Ajusta esto según la propiedad de tu objeto Pc que contenga el cuatrimestre
-        //         Revenue = menor27 // Usa la propiedad AvailableStorage para la cantidad de Revenue
-        //     });
-        // newItems.Add(new DataItem
-        //     {
-        //         Quarter = "mayor de 28", // Ajusta esto según la propiedad de tu objeto Pc que contenga el cuatrimestre
-        //         Revenue = mayor28 // Usa la propiedad AvailableStorage para la cantidad de Revenue
-        //     });
+        //         if (ramItem.TotalRamCapacity <= 8) ram8++;
+        //         else if (ramItem.TotalRamCapacity <= 12) ram12++;
+        //         else ram16++;
+        //     }
+        //     nullRAM = false;
+        // }
 
-        // Agregar todos los nuevos elementos a la lista newDataItemList
-        //newDataItemList.AddRange(newItems);
-        StartPieChart(pc50, pc50_100, pc100);
-        //StartDoughnutChart(pc50, pc50_100, pc100);
+        
+
+    //     pieStorage = new DataItem[] {
+    //     new DataItem
+    //     {
+    //         Category = "< 10%",
+    //         AvailableStorage = pc50
+    //     },
+    //     new DataItem
+    //     {
+    //         Category = "11-40%",
+    //         AvailableStorage = pc50_100
+    //     },
+    //     new DataItem
+    //     {
+    //         Category = "> 40%",
+    //         AvailableStorage = pc100
+    //     }
+
+    // };
+        StartPieChart(storage15, storage11_40, storage40);
+        //StartDoughnutChart(ram8, ram12, ram16);
 
     }
-    bool showDataLabels = false;
-
-    // void OnSeriesClick(SeriesClickEventArgs args)
+    // class DataItem
     // {
-    //     var category = args.Category.ToString();
-    //     NavigationManager.NavigateTo("/devices/availablestorage/" + category);
+    //     public string Category { get; set; }
+    //     public int AvailableStorage { get; set; }
     // }
-
-    // class DataItem2
-    // {
-    //     public string Quarter { get; set; }
-    //     public double Revenue { get; set; }
-    // }
-
 
     public void NavigateToPc(Guid Guid)
     {
         NavigationManager.NavigateTo("/pcDetails/" + Guid);
     }
-    //bool showDataLabels = false;
 
-    // void OnSeriesClick(SeriesClickEventArgs args)
-    // {
-    //     Console.WriteLine(args);
-    // }
-    class DataItem
-    {
-        public string Category { get; set; }
-        public int AvailableStorage { get; set; }
-    }
-    // Método de manejo de eventos
-    public async Task HandleChartClick(MouseEventArgs args)
-    {
-        // Aquí puedes agregar la lógica que deseas ejecutar cuando se haga clic en el gráfico
-        // Por ejemplo, mostrar un mensaje
-        await JS.InvokeVoidAsync("alert", "¡Se hizo clic en el gráfico!");
-    }
-    public void StartPieChart(int pc50, int pc50_100, int pc100)
+    public void StartPieChart(int value1, int value2, int value3)
     {
         _pieConfig = new PieConfig();
         _pieConfig.Options = new PieOptions
@@ -161,60 +180,61 @@
                 {
                     Position = Position.Right
                 }
-                };
+            };
 
-        foreach (var color in new[] { "-50GB", "50-100GB", "+100GB" })
+        foreach (var color in new[] { "<10%", "11-40%", ">40%" })
         {
             _pieConfig.Data.Labels.Add(color);
         }
-        PieDataset<int> dataset = new PieDataset<int>(new[] { pc50, pc50_100, pc100 })
+        PieDataset<int> dataset = new PieDataset<int>(new[] { value1, value2, value3 })
             {
                 BackgroundColor = new[]
-                            {
-            ColorUtil.ColorHexString(255, 0, 0), // Slice 1 aka "Red"
-            ColorUtil.ColorHexString(255, 155, 0), // Slice 2 aka "Yellow"
-            ColorUtil.ColorHexString(49, 147, 225), // Slice 3 aka "Green"
-            // ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+                                    {
+            ColorUtil.ColorHexString(255, 0, 0), // Slice 1 
+            ColorUtil.ColorHexString(255, 155, 0), // Slice 2 
+            ColorUtil.ColorHexString(49, 147, 225), // Slice 3 
         }
             };
 
         _pieConfig.Data.Datasets.Add(dataset);
 
     }
-    // public void StartDoughnutChart(int pc50, int pc50_100, int pc100)
-    // {
-    //     _doughtConfig = new PieConfig(useDoughnutType: true);
-    //     _doughtConfig.Options = new PieOptions()
-    //         {
+    public void StartDoughnutChart(int value1, int value2, int value3)
+    {
+        _doughtConfig = new PieConfig(useDoughnutType: true);
+        _doughtConfig.Options = new PieOptions()
+            {
+                Responsive = true,
+                // Title = new OptionsTitle
+                // {
+                //     Display = true,
+                //     Text = "Grafica de dona"
+                // },
+                OnClick = new DelegateHandler<ChartMouseEvent>(OnClickHandler),
+                Legend = new Legend
+                {
+                    Position = Position.Right
+                }
 
-    //             Responsive = true,
-    //             Title = new OptionsTitle
-    //             {
-    //                 Display = true,
-    //                 Text = "Grafica de dona"
-    //             },
+            };
+        foreach (var color in new[] { "<8GB", "8-12GB", ">12GB" })
+        {
+            _doughtConfig.Data.Labels.Add(color);
+        }
+        PieDataset<int> dataset = new PieDataset<int>(new[] { value1, value2, value3 })
+            {
+                BackgroundColor = new[]
+                                    {
+            ColorUtil.ColorHexString(255, 0, 0), // Slice 1 
+            ColorUtil.ColorHexString(255, 155, 0), // Slice 2 
+            ColorUtil.ColorHexString(49, 147, 225), // Slice 3 
+        }
+            };
 
-    //         };
+        _doughtConfig.Data.Datasets.Add(dataset);
 
-
-    //     foreach (var color in new[] { "-50GB", "50-100GB", "+100GB" })
-    //     {
-    //         _doughtConfig.Data.Labels.Add(color);
-    //     }
-    //     PieDataset<int> dataset = new PieDataset<int>(new[] { pc50, pc50_100, pc100 })
-    //         {
-    //             BackgroundColor = new[]
-    //                         {
-    //         ColorUtil.ColorHexString(255, 0, 0), // Slice 1 aka "Red"
-    //         ColorUtil.ColorHexString(255, 155, 0), // Slice 2 aka "Yellow"
-    //         ColorUtil.ColorHexString(49, 147, 225), // Slice 3 aka "Green"
-    //         // ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
-    //     }
-    //         };
-
-    //     _doughtConfig.Data.Datasets.Add(dataset);
-
-    // }
+    }
+    //Metodo que toma el click de la rebana del pastel
     public void OnClickHandler(JObject mouseEvent, JArray activeElements)
     {
         foreach (JObject elem in activeElements)
@@ -229,6 +249,6 @@
             }
         }
     }
-    
+
 
 }
