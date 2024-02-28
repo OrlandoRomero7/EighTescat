@@ -24,9 +24,15 @@ namespace TescatGlobalServer.Data
 
         public DbSet<ComputerCredentials> PC_Credentials => Set<ComputerCredentials>();
 
+        public DbSet<Storage> Storage => Set<Storage>();
+
+        public DbSet<MemoryRam> Memory_RAM => Set<MemoryRam>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             base.OnModelCreating(modelBuilder);
+            //No hay necesidad de usar .toTable("nombre_tabla") por que se le da el mismo nombre a la instancia de DBset que el de la BD.
 
             modelBuilder.Entity<User>()
                 .HasKey(a => a.ID_USER);
@@ -39,12 +45,25 @@ namespace TescatGlobalServer.Data
                .HasKey(c => c.USER_EMAILS_ID);
 
 
-            modelBuilder.Entity<UserPC>()
-                .HasKey(d => d.ID_PC);
-
+            modelBuilder.Entity<UserPC>(entity =>
+            {
+                entity.HasKey(d => d.ID_PC);
+            });
+                
 
             modelBuilder.Entity<ComputerCredentials>()
                 .HasKey(d => d.ID_PC);
+
+            modelBuilder.Entity<Storage>()
+                .HasKey(d => d.ID_STORAGE);
+
+            modelBuilder.Entity<MemoryRam>()
+                .HasKey(e => e.ID_RAM);
+
+          
+                
+
+
 
         }
 

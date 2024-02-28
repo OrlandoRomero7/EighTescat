@@ -212,7 +212,7 @@
 
 
     [Parameter]
-    public UserEmails? Emails { get; set; }
+    public UserEmails? Emails { get; set; } = default!;
 
     private bool accountOneDisplay;
     private bool accountTwoDisplay;
@@ -225,13 +225,13 @@
     public string initialStatePass1;
     public string initialStatePass2;
     public string initialStatePass3;
-    
 
+    public string variableActiva;
 
 
     protected override void OnInitialized()
     {
-
+        base.OnInitialized();
         if (!String.IsNullOrEmpty(Emails.EMAIL_1) || !String.IsNullOrEmpty(Emails.PASS_1))
         {
             accountOneDisplay = true;
@@ -258,6 +258,13 @@
             //variables["initialStatePass3"] = Emails.PASS_3;
         }
     }
+    ///////////No usar esto en el OnParamterSet
+    // if (inputType == "text")
+    // {
+    //     inputType = "password";
+    // }
+    // Y tampoco StateHasChanged();
+    ////////////////////////////////
     protected override void OnParametersSet()
     {
         //if (initalStatePass1 != Emails.PASS_1)
@@ -273,35 +280,9 @@
         {
             initialStatePass3 = String.Empty;
         }
-        // if (string.IsNullOrEmpty(Emails.PASS_3))
-        // {
-        //     initalStatePass3 = String.Empty;
-        // }
-
-
-        // if (!string.IsNullOrEmpty(Emails.PASS_1) && initalStatePass1 != Emails.PASS_1)
-        // {
-        //     initalStatePass1 = Emails.PASS_1;
-        //     //Console.WriteLine(Emails.PASS_1);
-        //     if (inputType == "text")
-        //     {
-        //         Console.WriteLine("Desde EmailFields"+Emails.PASS_1);
-        //         Console.WriteLine("Desde EmailFieldsInitial" + initalStatePass1);
-        //         //AlgorithmAES.DecryptString(Emails.PASS_1);
-        //     }
-        // }
-        // if (!string.IsNullOrEmpty(Emails.PASS_1) && initalStatePass1 != Emails.PASS_1)
-        // {
-        //     initalStatePass1 = Emails.PASS_1;
-
-        //     if (inputType == "text")
-        //     {
-        //         Console.WriteLine("Desde EmailFields"+Emails.PASS_1);
-        //         Console.WriteLine("Desde EmailFieldsInitial" + initalStatePass1);
-        //         AlgorithmAES.DecryptString(Emails.PASS_1);
-        //     }
-        // }
+        
     }
+
 
     private void activatingAccounts()
     {
@@ -359,6 +340,7 @@
             accountCounter = 0;
             Emails.EMAIL_1 = null;
             Emails.PASS_1 = null;
+            initialStatePass1 = null; 
         }
 
         if (emailNumber == 2)
@@ -367,6 +349,7 @@
             accountCounter = 1;
             Emails.EMAIL_2 = null;
             Emails.PASS_2 = null;
+            initialStatePass2 = null;
         }
         if (emailNumber == 3)
         {
@@ -374,6 +357,7 @@
             accountCounter = 2;
             Emails.EMAIL_3 = null;
             Emails.PASS_3 = null;
+            initialStatePass3 = null;
         }
 
 
