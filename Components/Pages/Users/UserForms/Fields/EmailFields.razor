@@ -1,4 +1,5 @@
-﻿@if (Emails is not null)
+﻿@using TescatGlobalServer.Helpers
+@if (Emails is not null)
 {
 
     @if (accountOneDisplay)
@@ -27,7 +28,15 @@
             <div class="col">
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Contraseña">
-                        <InputText id="password" class="form-control" @bind-Value="Emails.PASS_1" />
+                        <div class="input-group mb-3">
+                            <InputText  class="form-control" type="@inputType" @bind-Value="Emails.PASS_1" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" @onclick="()=>TogglePasswordVisibility(1)">
+                                    <i class="@iconClass"></i>
+                                </button>
+                            </div>
+                        </div>
+
                         <ValidationMessage For="() => Emails.PASS_1" />
                     </FormFieldSet>
                 </div>
@@ -82,7 +91,14 @@
             <div class="col">
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Contraseña">
-                        <InputText id="password" class="form-control" @bind-Value="Emails.PASS_2" />
+                        <div class="input-group mb-3">
+                            <InputText class="form-control" type="@inputType2" @bind-Value="Emails.PASS_2" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" @onclick="()=>TogglePasswordVisibility(2)">
+                                    <i class="@iconClass2"></i>
+                                </button>
+                            </div>
+                        </div>
                         <ValidationMessage For="() => Emails.PASS_2" />
                     </FormFieldSet>
                 </div>
@@ -137,7 +153,15 @@
             <div class="col">
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Contraseña">
-                        <InputText id="password" class="form-control" @bind-Value="Emails.PASS_3" />
+                        <div class="input-group mb-3">
+                            <InputText id="password" class="form-control" type="@inputType3" @bind-Value="Emails.PASS_3" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" @onclick="()=>TogglePasswordVisibility(3)">
+                                    <i class="@iconClass3"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
                         <ValidationMessage For="() => Emails.PASS_3" />
                     </FormFieldSet>
                 </div>
@@ -195,6 +219,14 @@
     private bool accountThreeDisplay;
 
     private int accountCounter;
+    @*varaibles necesarias para la encriptacion*@
+    public Dictionary<string, string> variables = new Dictionary<string, string>();
+    public string passTemp;
+    public string initialStatePass1;
+    public string initialStatePass2;
+    public string initialStatePass3;
+    
+
 
 
     protected override void OnInitialized()
@@ -204,12 +236,17 @@
         {
             accountOneDisplay = true;
             accountCounter = 1;
+            initialStatePass1 = Emails.PASS_1;
+            //se necesita saber el estado inicial del password
+            //variables["initialStatePass1"] = Emails.PASS_1;
         }
         if (!String.IsNullOrEmpty(Emails.EMAIL_2) || !String.IsNullOrEmpty(Emails.PASS_2))
         {
             accountOneDisplay = true;
             accountTwoDisplay = true;
             accountCounter = 2;
+            initialStatePass2 = Emails.PASS_2;
+            //variables["initialStatePass2"] = Emails.PASS_2;
         }
         if (!String.IsNullOrEmpty(Emails.EMAIL_3) || !String.IsNullOrEmpty(Emails.PASS_3))
         {
@@ -217,11 +254,54 @@
             accountTwoDisplay = true;
             accountThreeDisplay = true;
             accountCounter = 3;
+            initialStatePass3 = Emails.PASS_3;
+            //variables["initialStatePass3"] = Emails.PASS_3;
         }
     }
+    protected override void OnParametersSet()
+    {
+        //if (initalStatePass1 != Emails.PASS_1)
+        if (string.IsNullOrEmpty(Emails.PASS_1))
+        {
+            initialStatePass1 = String.Empty;
+        }
+        if (string.IsNullOrEmpty(Emails.PASS_2))
+        {
+            initialStatePass2 = String.Empty;
+        }
+        if (string.IsNullOrEmpty(Emails.PASS_3))
+        {
+            initialStatePass3 = String.Empty;
+        }
+        // if (string.IsNullOrEmpty(Emails.PASS_3))
+        // {
+        //     initalStatePass3 = String.Empty;
+        // }
 
 
+        // if (!string.IsNullOrEmpty(Emails.PASS_1) && initalStatePass1 != Emails.PASS_1)
+        // {
+        //     initalStatePass1 = Emails.PASS_1;
+        //     //Console.WriteLine(Emails.PASS_1);
+        //     if (inputType == "text")
+        //     {
+        //         Console.WriteLine("Desde EmailFields"+Emails.PASS_1);
+        //         Console.WriteLine("Desde EmailFieldsInitial" + initalStatePass1);
+        //         //AlgorithmAES.DecryptString(Emails.PASS_1);
+        //     }
+        // }
+        // if (!string.IsNullOrEmpty(Emails.PASS_1) && initalStatePass1 != Emails.PASS_1)
+        // {
+        //     initalStatePass1 = Emails.PASS_1;
 
+        //     if (inputType == "text")
+        //     {
+        //         Console.WriteLine("Desde EmailFields"+Emails.PASS_1);
+        //         Console.WriteLine("Desde EmailFieldsInitial" + initalStatePass1);
+        //         AlgorithmAES.DecryptString(Emails.PASS_1);
+        //     }
+        // }
+    }
 
     private void activatingAccounts()
     {
@@ -265,7 +345,7 @@
 
         activatingAccounts();
 
-        StateHasChanged();
+        //StateHasChanged();
 
 
     }
@@ -297,9 +377,118 @@
         }
 
 
-        StateHasChanged();
+        //StateHasChanged();
 
     }
+    private string inputType = "password";
+    private string iconClass = "bi bi-eye";
+    private string inputType2 = "password";
+    private string iconClass2 = "bi bi-eye";
+    private string inputType3 = "password";
+    private string iconClass3 = "bi bi-eye";
+
+    public string initalStatePass = "";
+    public string email;
+    public string initialState;
+    public string inputTypeUniv;
+
+    public void TogglePasswordVisibility(int number)
+    {
+        switch (number)
+        {
+            case 1:
+                email = Emails.PASS_1;
+                initialState = initialStatePass1;
+                inputTypeUniv = inputType;
+                //emailToBind = $"Email.PASS_{1}";
+                break;
+            case 2:
+                email = Emails.PASS_2;
+                initialState = initialStatePass2;
+                inputTypeUniv = inputType2;
+                break;
+            case 3:
+                email = Emails.PASS_3;
+                initialState = initialStatePass3;
+                inputTypeUniv = inputType3;
+                break;
+        }
+        if (inputTypeUniv == "password")
+        {
+            if (!string.IsNullOrEmpty(initialState))
+            {
+                passTemp = AlgorithmAES.DecryptString(email);
+                if (!string.IsNullOrEmpty(passTemp))
+                {
+                    if (number == 1) inputType = "text";
+                    if (number == 2) inputType2 = "text";
+                    if (number == 3) inputType3 = "text";
+                    AssignPassTemp(number, passTemp);
+                    //Emails.PASS_1 = passTemp;
+                }
+            }
+            else
+            {
+                if (number == 1) inputType = "text";
+                if (number == 2) inputType2 = "text";
+                if (number == 3) inputType3 = "text";
+            }
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(initialState))
+            {
+                if (number == 1) inputType = "password";
+                if (number == 2) inputType2 = "password";
+                if (number == 3) inputType3 = "password";
+            }
+            else
+            {
+                if (number == 1) inputType = "password";
+                if (number == 2) inputType2 = "password";
+                if (number == 3) inputType3 = "password";
+                ReturnStateInitial(number,initialState);
+                //Emails.PASS_1 = initialState;
+            }
+        }
+        if (number == 1) iconClass = inputType == "password" ? "bi bi-eye" : "bi bi-eye-slash";
+        if (number == 2) iconClass2 = inputType2 == "password" ? "bi bi-eye" : "bi bi-eye-slash";
+        if (number == 3) iconClass3 = inputType3 == "password" ? "bi bi-eye" : "bi bi-eye-slash";
+
+
+    }
+    public void AssignPassTemp(int number, string passTemp)
+    {
+        switch (number)
+        {
+            case 1:
+                Emails.PASS_1 = passTemp;
+                break;
+            case 2:
+                Emails.PASS_2 = passTemp;
+                break;
+            case 3:
+                Emails.PASS_3 = passTemp;
+                break;
+        }
+
+    }
+    public void ReturnStateInitial(int number,string initialState)
+    {
+        switch (number)
+        {
+            case 1:
+                Emails.PASS_1 = initialState;
+                break;
+            case 2:
+                Emails.PASS_2 = initialState;
+                break;
+            case 3:
+                Emails.PASS_3 = initialState;
+                break;
+        }
+    }
+
 
 
 }
