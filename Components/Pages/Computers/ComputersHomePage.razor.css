@@ -13,11 +13,11 @@
         /*   color: blue !important;*/
     }
 
-  /*  ::deep .quickgrid[theme=tescat] button.col-title:hover, ::deep .quickgrid[theme=tescat] .col-options-button:hover {
+/*  ::deep .quickgrid[theme=tescat] button.col-title:hover, ::deep .quickgrid[theme=tescat] .col-options-button:hover {
         background-color: var(--brand);
     }*/
 
-  /*  ::deep .quickgrid[theme=tescat] button.col-title:active, ::deep .quickgrid[theme=tescat] .col-options-button:active {
+/*  ::deep .quickgrid[theme=tescat] button.col-title:active, ::deep .quickgrid[theme=tescat] .col-options-button:active {
         background-color: var(--brand-hover);
     }*/
 
@@ -31,8 +31,17 @@
     max-width: 19rem;
 }
 
+    ::deep td a {
+        color: var(--brand-text);
+    }
+
+        ::deep td a:hover {
+            color: #ef443b;
+            font-weight: 500;
+        }
+
 ::deep tr {
-    height: 4rem;
+    height: 5rem;
     border-bottom: 1px solid rgb(6 21 31 / .25); /* --brand-text in rgb values with opacity at 25%;*/
 }
 
@@ -59,6 +68,16 @@
 ::deep thead:after {
     background: red;
 }
+
+::deep .col-header-content {
+    padding: 10px 0px;
+    justify-content: center;
+}
+
+::deep th.first-column .col-header-content {
+    justify-content: flex-start;
+}
+
 
 /* Subtle stripe effect */
 /*    ::deep tr:nth-child(even) {
@@ -95,9 +114,10 @@
 
 
 ::deep td.mantt-date {
+    font-weight: 500;
     letter-spacing: 1.5px;
     font-size: 14px;
-    padding-left: 2px
+    /*    padding-left: 2px*/
 }
 
 @media (min-width: 959px) {
@@ -112,6 +132,7 @@
     display: flex;
     align-items: center;
     padding: 26px 16px;
+    justify-content: space-between;
 }
 
 
@@ -124,8 +145,10 @@
 }
 
     .grid-controlers-header-left span {
-        font-size: 2rem;
-        font-weight: 500;
+        font-size: 1.65rem;
+        cursor:pointer;
+       /* margin-top:.75px;*/
+     /*   font-weight: 500;*/
     }
 
     .grid-controlers-header-left button {
@@ -153,7 +176,7 @@
 
 
 div .grid {
-    height: 94%;
+    height: 98.25%;
     overflow-y: auto;
 }
 
@@ -194,6 +217,9 @@ div.container {
         text-transform: capitalize;
     }
 
+::deep .col-title {
+    flex-grow: 0;
+}
 
 .paginator-container {
     position: sticky;
@@ -221,10 +247,6 @@ div.container {
 }
 
 
-::deep .col-header-content {
-    padding: 10px 0px;
-}
-
 /* For WebKit browsers like Chrome and Safari */
 ::-webkit-scrollbar {
     width: 2px;
@@ -249,16 +271,105 @@ div.container {
 }
 
 
-/*
 
-::-webkit-scrollbar-button {
-    width: 20px;
-    height: 65px;
-    background: var(--brand-white);
+
+.searchbox {
+    background-color: var(--brand-white);
+    background: transparent;
+    padding: 0px 15px;
+    font-size: 17px;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: 3rem;
+    transition: width 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    border: 1px solid rgb(6 21 31 / .25); /* --brand-text in rgb values with opacity at 25%;*/
+    cursor: pointer;
 }
 
-    ::-webkit-scrollbar-button:vertical:increment {
-        background: white;
+    .searchbox.using {
+        width: 15rem;
+        transition: width 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
     }
-*/
 
+        .searchbox.using i {
+            margin-right: 0px;
+            margin-top: 1px;
+            /* transition: margin-right 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;*/
+        }
+
+        .searchbox.using input {
+            padding-left: 7.5px;
+        }
+
+
+
+    .searchbox:focus-within {
+        width: 15rem;
+        transition: width 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    }
+
+
+    .searchbox input {
+        padding-left: 3rem;
+    }
+
+
+    .searchbox:focus-within input {
+        padding-left: 15px;
+        padding-left: 7.5px;
+    }
+
+    .searchbox i {
+        margin-right: -49px;
+        /* transition: margin-right 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;*/
+    }
+
+    .searchbox:focus-within i {
+        margin-right: 0px;
+        /*  transition: margin-right 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;*/
+    }
+
+
+
+    .searchbox input {
+        background-color: transparent;
+        color: var(--brand-text);
+        border: none;
+        outline: none;
+        /*    height: 2.5rem;*/
+        height: 31px;
+        width: 100%;
+        /*position: absolute;*/
+        cursor: pointer;
+    }
+
+        .searchbox input:focus {
+            cursor: text;
+        }
+
+            .searchbox input:focus::placeholder {
+                opacity: 1;
+                transition: opacity 0.5s, color 0.5s, ease;
+                color: rgb(6 21 31 / 50%);
+            }
+
+
+        .searchbox input::placeholder {
+            font-size: 1rem;
+            font-style: italic;
+            opacity: 0;
+            color: transparent;
+        }
+
+i .search-icon {
+    font-size: 1.75rem;
+    font-size: 26px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-right: 2px;
+    color: var(--brand-text);
+}

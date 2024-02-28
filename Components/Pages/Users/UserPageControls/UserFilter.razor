@@ -59,6 +59,8 @@
 
         </button>
 
+
+
         <div class="dropdown-menu user-length-filter shadow mt-1 @_closeLengthFilter" style="border-radius:6px;">
 
 
@@ -118,10 +120,10 @@
     </div>
 
     @*
-        <button class="btn btn-outline-secondary"
-                    @onclick="ClearSearchFilter">
-                Limpiar
-            </button>*@
+    <button class="btn btn-outline-secondary"
+    @onclick="ClearSearchFilter">
+    Limpiar
+    </button>*@
 
 </div>
 
@@ -154,7 +156,7 @@
 
 
     protected override void
-   OnInitialized()
+       OnInitialized()
     {
         @*we retrieve the values from UsersHomePage to set the values contained in the query string when loading the page directly*@
         _userOffice = UserOffice ?? "";

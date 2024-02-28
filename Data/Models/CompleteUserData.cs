@@ -8,5 +8,7 @@ namespace TescatGlobalServer.Data.Models
         public UserCredentials? Credentials { get; set; }
         public UserEmails? Emails { get; set; }
 
+        public UserPC? Computers { get; set; }
+
     }
 }

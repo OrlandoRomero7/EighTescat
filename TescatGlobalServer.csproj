@@ -9,11 +9,12 @@
 
   <ItemGroup>
     <None Remove="Components\Pages\Computers\ComputersHomePage.razor.css" />
+    <None Remove="Components\Pages\Computers\ComputerTableControls.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Components\favicon.png" />
     <Content Include="Components\Pages\Computers\ComputersHomePage.razor.css" />
+    <Content Include="Components\Pages\Computers\ComputerTableControls.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
+    <None Include="wwwroot\favicon.png" />
   </ItemGroup>
 
 </Project>

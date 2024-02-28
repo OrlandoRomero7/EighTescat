@@ -83,6 +83,9 @@
     [Parameter]
     public UserEmails? Emails { get; set; }
 
+    [Parameter]
+    public UserPC? Computers { get; set; }
+
     private CompleteUserData completeUserData = new CompleteUserData();
 
 
@@ -126,6 +129,7 @@
         completeUserData.User = User;
         completeUserData.Credentials = Credentials;
         completeUserData.Emails = Emails;
+        completeUserData.Computers = Computers;
 
     }
 

@@ -4,25 +4,37 @@
 
 <PageTitle>Equipos - Project Tescatlipoca</PageTitle>
 
-@* <h1 style="padding-left: 5px; margin:3.625rem 0 1rem .25rem; ">Equipos</h1> *@
-
 
 <div class="container shadow">
 
     <div class="grid-controlers-header">
-
-
         <div class="grid-controlers-header-left @computerStatusStyles">
+
             <button @onclick="ShowStatus">
                 Todos
-            </button>
-            <span class="bi bi-plus"></span>
+            </button><span class="material-symbols-rounded">add</span>
+
 
         </div>
 
 
+        <div class="grid-controlers-header-right">
 
+            <div class="searchbox shadow-sm @searchBoxStatusStyles()">
+
+                <i class="material-symbols-rounded search-icon">manage_search</i>
+                <input type="search"
+                       placeholder="Nombre, Puesto, Depart..."
+                       @bind="currentFilter"
+                       @oninput="concatenateComputerSearch"
+                       @onfocus="concatenatedSetSearchFocus"
+                       @onblur="concatenatedSetSearchBlur">
+
+            </div>
+
+        </div>
     </div>
+
 
     <div class="grid ">
         <QuickGrid Items="@computersData" Theme="tescat" Pagination="@pagination">
@@ -37,22 +49,31 @@
                 </TemplateColumn>
             }
 
+
             <PropertyColumn Align=Align.Left Property="@(c => c.PC_NAME)" Sortable="true" Title="Equipo" Class="first-column">
                 <ColumnOptions>
                     <div class="search-box">
-                        <input type="search" autofocus @bind="computerNameFilter" @bind:event="oninput" />
-                    </div>c
+                        <input type="search" autofocus
+                               @bind="currentFilter"
+                               @oninput="concatenateComputerSearch"
+                               @onfocus="computerSetSearchFocus"
+                               @onblur="computerSetSearchBlur" />
+                    </div>
                 </ColumnOptions>
             </PropertyColumn>
 
 
-            <PropertyColumn Align=Align.Left Property="@(c => LongDateFormat(c.LAST_MAINT))" Sortable="true" Title="Ultimo Mantenimiento" Class="mantt-date" />
+            <PropertyColumn Align=Align.Left Property="@(c => LongDateFormat(c.LAST_MAINT))" Sortable="true" Title="Ultimo Mantenimiento" Class="first-column mantt-date" />
 
 
-            <PropertyColumn Align="Align.Center" Property="@(c => ComputerUser(c.ID_USER))" Sortable="true" Title="Usuario" Class="user-name" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Descending">
+            <PropertyColumn Align="Align.Center" Property="@(c => ComputerUser(c.ID_USER))" Sortable="true" Title="Usuario" Class="user-name" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending">
                 <ColumnOptions>
                     <div class="search-box">
-                        <input type="search" autofocus @bind="userNameFilter" @bind:event="oninput" />
+                        <input type="search" autofocus
+                               @bind="currentFilter"
+                               @oninput="concatenateComputerSearch"
+                               @onfocus="userSetSearchFocus"
+                               @onblur="userSetSearchBlur" />
                     </div>
                 </ColumnOptions>
             </PropertyColumn>
@@ -63,17 +84,19 @@
 
             <PropertyColumn Align=Align.Center Property="@(c => ComputerOffice(c.ID_USER))" Sortable="true" Title="Oficina" />
 
-            <PropertyColumn Align=Align.Center Property="@(c => ComputerAnyDeskID(c.ID_PC))" Sortable="true" Title="ID Anydesk" />
 
+            <TemplateColumn Align="Align.Center" Title="ID Anydesk" Sortable="true">
 
-            @*
-            <PropertyColumn Align=Align.Center Property="@(c => c.IP)" Sortable="true" Title="Direccion IP" /> *@
+                <a href="anydesk:@ComputerAnyDeskID(context.ID_PC)">
+
+                    @ComputerAnyDeskID(context.ID_PC)
+
+                </a>
+
+            </TemplateColumn>
+
 
         </QuickGrid>
-
-
-
-
     </div>
 
 
@@ -81,37 +104,27 @@
     <div class="paginator-container">
         <div class="paginator-content">
 
-
             <Paginator State="@pagination" />
-
             <div class="page-size-chooser">
                 Equipos por pagina:
                 <select @bind="@pagination.ItemsPerPage">
-                    <option>6</option>
-                    <option>12</option>
-                    <option>18</option>
-                    <option>24</option>
-                    <option>30</option>
-                    <option>36</option>
-                    <option>42</option>
-                    <option>48</option>
+                    @for (int i = 6; i <= 48; i += 6)
+                    {
+                        <option>@i</option>
+                    }
                 </select>
             </div>
-
 
         </div>
     </div>
 
 
-
-
 </div>
 
-@* <a href="anydesk:340271832">340 271 832</a>
 
- *@
+
+
 @code {
-
     IQueryable<UserPC>? allComputersList { get; set; }
     PaginationState pagination = new PaginationState { ItemsPerPage = 30 };
 
@@ -120,126 +133,10 @@
     private List<User>? Users { get; set; }
     private List<ComputerCredentials>? Credentials { get; set; }
 
+    string? currentFilter;
     string? computerNameFilter;
     string? userNameFilter;
-
-    bool computerStatusCircles = false;
-    string? computerStatusStyles;
-
-
-
-    IQueryable<UserPC> computersData
-    {
-        get
-        {
-            var result = allComputersList;
-
-            // displaying just active users
-            result = (result != null && !computerStatusCircles) ? result.Where(c => c.ID_USER != null && c.ID_USER != 0) : result;
-
-            if (!string.IsNullOrEmpty(userNameFilter))
-            {
-                result = result.Where(c =>
-                ComputerUser(c.ID_USER).Contains(userNameFilter, StringComparison.CurrentCultureIgnoreCase));
-            }
-
-            if (!string.IsNullOrEmpty(computerNameFilter))
-            {
-                result = result.Where(c =>
-               c.PC_NAME.Contains(computerNameFilter,
-                   StringComparison.CurrentCultureIgnoreCase));
-            }
-
-            return result;
-        }
-    }
-
-
-
-    GridSort<UserPC> sortUserId = GridSort<UserPC>
-       .ByAscending(p => p.ID_USER)
-       .ThenDescending(p => p.ID_USER);
-
-    private void ShowStatus()
-    {
-        computerStatusCircles = !computerStatusCircles;
-        if (!computerStatusCircles)
-        {
-            computerStatusStyles = "disabled";
-        }
-        else
-        {
-            computerStatusStyles = "enabled";
-        }
-
-    }
-
-
-    string computerStatusColor(int? userId)
-    {
-        return userId.HasValue ? "#3ba28f" : "#e32044";
-    }
-
-
-
-
-    string LongDateFormat(DateTime? date)
-    {
-        if (date.HasValue)
-        {
-            CultureInfo culture = new CultureInfo("es-MX");
-            TextInfo textInfo = culture.TextInfo;
-
-            string formattedDate = date.Value.ToString("dd MMMM yyyy", culture);
-
-            return textInfo.ToTitleCase(formattedDate);
-        }
-        else
-        {
-            return string.Empty;
-        }
-    }
-
-
-
-    string ComputerUser(int? userId)
-    {
-        if (userId.HasValue && Users != null)
-        {
-            var user = Users.FirstOrDefault(u => u.ID_USER == userId);
-            return user?.NAME ?? "INACTIVO";
-        }
-
-        return "";
-    }
-
-
-    string ComputerOffice(int? userId)
-    {
-        if (userId.HasValue && Users != null)
-        {
-            var user = Users.FirstOrDefault(u => u.ID_USER == userId);
-            return user?.OFFICE ?? "";
-        }
-
-        return "";
-    }
-
-
-    string ComputerAnyDeskID(Guid? computerId)
-    {
-        if (computerId.HasValue && Credentials != null)
-        {
-            var id = Credentials.FirstOrDefault(u => u.ID_PC == computerId);
-            return id?.ID_ANYDESK ?? "";
-        }
-
-
-        return "";
-    }
-
-
-
+    string? concatenatedFilters;
 
     protected override async
     Task OnInitializedAsync()
@@ -263,19 +160,297 @@
         }
     }
 
-
     private async
-     Task GetAllComputers(MainDbContext context) => Computers = await context.PC.ToListAsync();
-
-
-    private async
-    Task GetAllCredentials(MainDbContext context) => Credentials = await context.PC_Credentials.ToListAsync();
+    Task GetAllComputers(MainDbContext context) => Computers = await context.PC
+       .Select(c => new UserPC { ID_PC = c.ID_PC, ID_USER = c.ID_USER, PC_NAME = c.PC_NAME, LAST_MAINT = c.LAST_MAINT, PC_TYPE = c.PC_TYPE })
+       .ToListAsync();
 
 
     private async
-    Task GetAllUsers(MainDbContext context) => Users = await context.Users.ToListAsync();
+    Task GetAllCredentials(MainDbContext context) => Credentials = await context.PC_Credentials
+    .Select(uc => new ComputerCredentials { ID_PC = uc.ID_PC, ID_ANYDESK = uc.ID_ANYDESK })
+    .ToListAsync();
+
+    private async
+    Task GetAllUsers(MainDbContext context) => Users = await context.Users
+    .Select(u => new User { ID_USER = u.ID_USER, NAME = u.NAME, OFFICE = u.OFFICE })
+    .ToListAsync();
 
 
+
+    IQueryable<UserPC> computersData
+    {
+        get
+        {
+            var result = allComputersList;
+
+            // Displaying just active users
+            result = (result != null && !computerStatusCircles) ? result.Where(c => c.ID_USER != null && c.ID_USER != 0) : result;
+
+            if (!string.IsNullOrEmpty(concatenatedFilters))
+            {
+                result = result.Where(c =>
+                    concatenatedFilters.Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                                           .All(filter =>
+                                           c.PC_NAME.Contains(filter, StringComparison.CurrentCultureIgnoreCase) ||
+                                           ComputerUser(c.ID_USER).Contains(filter, StringComparison.CurrentCultureIgnoreCase))
+                );
+            }
+
+
+
+            if (!string.IsNullOrEmpty(computerNameFilter))
+            {
+                result = result.Where(c => c.PC_NAME.Contains(computerNameFilter, StringComparison.CurrentCultureIgnoreCase));
+            }
+
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+                result = result.Where(c => ComputerUser(c.ID_USER).Contains(userNameFilter, StringComparison.CurrentCultureIgnoreCase));
+            }
+
+
+            return result;
+
+        }
+    }
+
+    GridSort<UserPC> sortUserId = GridSort<UserPC>
+       .ByAscending(p => p.ID_USER)
+       .ThenDescending(p => p.ID_USER);
+
+    bool computerStatusCircles = false;
+    string? computerStatusStyles;
+
+
+    private void ShowStatus()
+    {
+        computerStatusCircles = !computerStatusCircles;
+        computerStatusStyles = computerStatusCircles ? "enabled" : "disabled";
+    }
+
+    string? searchBoxStatusStyles()
+    {
+        var searchBoxWidth = "";
+
+
+        if (!string.IsNullOrEmpty(currentFilter))
+        {
+            searchBoxWidth = "using";
+
+        }
+        return searchBoxWidth;
+    }
+
+    string computerStatusColor(int? userId)
+    {
+        return userId.HasValue ? "#3ba28f" : "#e32044";
+    }
+
+
+    string LongDateFormat(DateTime? date)
+    {
+        if (date.HasValue)
+        {
+            CultureInfo culture = new CultureInfo("es-MX");
+            TextInfo textInfo = culture.TextInfo;
+
+            string formattedDate = date.Value.ToString("dd MMMM yyyy", culture);
+
+            return textInfo.ToTitleCase(formattedDate);
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+
+    string ComputerUser(int? userId)
+    {
+        if (userId.HasValue && Users != null)
+        {
+
+            var user = Users.FirstOrDefault(u => u.ID_USER == userId);
+            return user?.NAME ?? "INACTIVO";
+        }
+
+        return "";
+    }
+
+
+    string ComputerOffice(int? userId)
+    {
+
+        if (userId.HasValue && Users != null)
+        {
+
+            var user = Users.FirstOrDefault(u => u.ID_USER == userId);
+            return user?.OFFICE ?? "";
+        }
+
+        return "";
+    }
+
+
+    string ComputerAnyDeskID(Guid? computerId)
+    {
+        if (computerId.HasValue && Credentials != null)
+        {
+            var id = Credentials.FirstOrDefault(u => u.ID_PC == computerId);
+            return id?.ID_ANYDESK ?? "";
+        }
+
+
+        return "";
+    }
+
+
+
+
+    // ---------------------------------------------------------
+    bool concatenatedSearchHasFocus = false;
+    bool computerSearchHasFocus = false;
+    bool userSearchHasFocus = false;
+
+
+    private void concatenatedSetSearchFocus()
+    {
+        computerSearchHasFocus = false;
+        userSearchHasFocus = false;
+        concatenatedSearchHasFocus = true;
+    }
+    private void concatenatedSetSearchBlur() => concatenatedSearchHasFocus = false;
+
+
+
+    private void computerSetSearchFocus()
+    {
+        concatenatedSearchHasFocus = false;
+        userSearchHasFocus = false;
+        computerSearchHasFocus = true;
+
+        if (!string.IsNullOrEmpty(computerNameFilter))
+        {
+            currentFilter = computerNameFilter;
+        }
+
+        if (!string.IsNullOrEmpty(userNameFilter))
+        {
+            currentFilter = null;
+            userNameFilter = null;
+        }
+
+        else if (!string.IsNullOrEmpty(concatenatedFilters))
+        {
+            currentFilter = null;
+        }
+    }
+    private void computerSetSearchBlur() => computerSearchHasFocus = false;
+
+
+
+    private void userSetSearchFocus()
+    {
+        concatenatedSearchHasFocus = false;
+        computerSearchHasFocus = false;
+        userSearchHasFocus = true;
+
+        if (!string.IsNullOrEmpty(userNameFilter))
+        {
+            currentFilter = userNameFilter;
+        }
+
+
+        if (!string.IsNullOrEmpty(computerNameFilter))
+        {
+            currentFilter = null;
+
+        }
+
+        else if (!string.IsNullOrEmpty(concatenatedFilters))
+        {
+            currentFilter = null;
+        }
+
+
+    }
+    private void userSetSearchBlur() => userSearchHasFocus = false;
+
+
+
+
+
+    private void concatenateComputerSearch(ChangeEventArgs e)
+    {
+        if (concatenatedSearchHasFocus)
+        {
+            concatenatedFilters = e.Value.ToString();
+        }
+        if (computerSearchHasFocus)
+        {
+            computerNameFilter = e.Value.ToString();
+        }
+        if (userSearchHasFocus)
+        {
+            userNameFilter = e.Value.ToString();
+        }
+
+
+        UpdateCurrentFilter();
+
+
+    }
+
+
+
+
+
+    private void UpdateCurrentFilter()
+    {
+        if (concatenatedSearchHasFocus)
+        {
+            currentFilter = concatenatedFilters;
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+                userNameFilter = null;
+            }
+            if (!string.IsNullOrEmpty(computerNameFilter))
+            {
+                computerNameFilter = null;
+            }
+
+        }
+
+        if (computerSearchHasFocus)
+        {
+            currentFilter = computerNameFilter;
+            if (!string.IsNullOrEmpty(concatenatedFilters))
+            {
+                concatenatedFilters = null;
+            }
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+
+                userNameFilter = null;
+            }
+
+        }
+
+        if (userSearchHasFocus)
+        {
+            currentFilter = userNameFilter;
+            if (!string.IsNullOrEmpty(concatenatedFilters))
+            {
+                concatenatedFilters = null;
+            }
+            if (!string.IsNullOrEmpty(computerNameFilter))
+            {
+                computerNameFilter = null;
+            }
+
+        }
+    }
 
 
 
