@@ -13,6 +13,8 @@
         public string? SPEED { get; set; }
 
         public Guid? ID_PC { get; set; }
+
+        public virtual UserPC? IdPcNavigation { get; set; }
     }
 }
 

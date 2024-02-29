@@ -9,7 +9,7 @@ namespace TescatGlobalServer.Helpers
         {
             try
             {
-                if (IsBase64String(plainText))
+                if (IsEncryptedString(plainText))
                 {
                     // Si ya está en formato base64, devuelve el texto original sin realizar ninguna operación
                     return plainText;
@@ -112,20 +112,58 @@ namespace TescatGlobalServer.Helpers
             }
             
         }
-        private static bool IsBase64String(string s)
+
+        public static bool IsEncryptedString(string input)
         {
-            // Intenta convertir el string a bytes en base64
             try
             {
-                byte[] data = Convert.FromBase64String(s);
-                // Decodificación exitosa, devuelve true
+                // Intenta decodificar el texto en formato base64
+                byte[] data = Convert.FromBase64String(input);
+
+                // Suponiendo que el texto está encriptado, no debería lanzar una excepción al intentar decodificarlo
+                // Pero para estar más seguro, podrías intentar desencriptar los datos y verificar si se lanza una excepción
+                // Necesitarás la misma clave y IV utilizados para encriptar el texto original
+                string keyBase64 = Environment.GetEnvironmentVariable("LlaveCifrada");
+                byte[] key = Convert.FromBase64String(keyBase64);
+                byte[] iv = new byte[16]; // Asegúrate de tener el IV correcto aquí
+
+                using (Aes aesAlg = Aes.Create())
+                {
+                    aesAlg.Key = key;
+                    aesAlg.IV = iv;
+
+                    using (ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV))
+                    {
+                        // Intenta desencriptar los datos
+                        byte[] decryptedData = decryptor.TransformFinalBlock(data, 0, data.Length);
+                    }
+                }
+
+                // Si no se lanzó ninguna excepción al desencriptar, entonces el texto está cifrado
                 return true;
             }
-            catch (FormatException)
+            catch
             {
-                // Si ocurre una excepción, el string no es base64
+                // Si se lanza una excepción al intentar decodificar o desencriptar el texto, entonces no está cifrado
                 return false;
             }
         }
+
+
+        //private static bool IsBase64String(string s)
+        //{
+        //    // Intenta convertir el string a bytes en base64
+        //    try
+        //    {
+        //        byte[] data = Convert.FromBase64String(s);
+        //        // Decodificación exitosa, devuelve true
+        //        return true;
+        //    }
+        //    catch (FormatException)
+        //    {
+        //        // Si ocurre una excepción, el string no es base64
+        //        return false;
+        //    }
+        //}
     }
 }

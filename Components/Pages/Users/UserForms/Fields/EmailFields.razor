@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <ValidationMessage For="() => Emails.PASS_1" />
+                        @* <ValidationMessage For="() => Emails.PASS_1" /> *@
                     </FormFieldSet>
                 </div>
             </div>
@@ -268,19 +268,59 @@
     protected override void OnParametersSet()
     {
         //if (initalStatePass1 != Emails.PASS_1)
-        if (string.IsNullOrEmpty(Emails.PASS_1))
+        // if (string.IsNullOrEmpty(Emails.PASS_1))
+        // {
+        //     initialStatePass1 = String.Empty;
+        // }
+        // if (string.IsNullOrEmpty(Emails.PASS_2))
+        // {
+        //     initialStatePass2 = String.Empty;
+        // }
+        // if (string.IsNullOrEmpty(Emails.PASS_3))
+        // {
+        //     initialStatePass3 = String.Empty;
+        // }
+        if (Emails.PASS_1 != null && Emails.PASS_1!="" && initialStatePass1 != Emails.PASS_1)
         {
-            initialStatePass1 = String.Empty;
+            initialStatePass1 = Emails.PASS_1;
+            Console.WriteLine("Cambio Email1");
+            Console.WriteLine("Valor de EmailPass1: "+Emails.PASS_1);
+            Console.WriteLine("Valor de initialPass1: "+initialStatePass1);
+            if (inputType=="text")
+            {
+                inputType = "password";
+            }
+            
         }
-        if (string.IsNullOrEmpty(Emails.PASS_2))
+        if (Emails.PASS_2 != null && Emails.PASS_2 != "" && initialStatePass2 != Emails.PASS_2)
         {
-            initialStatePass2 = String.Empty;
+            initialStatePass2 = Emails.PASS_2;
+            Console.WriteLine("Cambio Email1");
+            Console.WriteLine("Valor de EmailPass1: " + Emails.PASS_2);
+            Console.WriteLine("Valor de initialPass1: " + initialStatePass2);
+            if (inputType2 == "text")
+            {
+                inputType2 = "password";
+            }
+
         }
-        if (string.IsNullOrEmpty(Emails.PASS_3))
+        if (Emails.PASS_3 != null && Emails.PASS_3 != "" && initialStatePass3 != Emails.PASS_3)
         {
-            initialStatePass3 = String.Empty;
+            initialStatePass3 = Emails.PASS_3;
+            Console.WriteLine("Cambio Email1");
+            Console.WriteLine("Valor de EmailPass1: " + Emails.PASS_3);
+            Console.WriteLine("Valor de initialPass1: " + initialStatePass3);
+            if (inputType3 == "text")
+            {
+                inputType3 = "password";
+            }
+
         }
-        
+
+        // if (string.IsNullOrEmpty(Emails.PASS_1))
+        // {
+        //     initialStatePass1 = String.Empty;
+        // }
     }
 
 
