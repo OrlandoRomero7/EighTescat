@@ -66,8 +66,7 @@ else
     private string[]? DepartmentsList { get; set; }
     private string[]? OfficeList { get; set; }
     private string[]? AreasList { get; set; }
-
-
+    
 
 
     protected override async
@@ -75,7 +74,6 @@ else
     {
         IsBusy = true;
         SuccessMessage = null;
-
 
         try
         {
@@ -227,7 +225,11 @@ else
         else
         {
             //aqui se mandan a actualizar los datos
-
+            updatedCredentials.PORTAL_PASS = !string.IsNullOrEmpty(updatedCredentials.PORTAL_PASS) ? AlgorithmAES.EncryptString(updatedCredentials.PORTAL_PASS) : null;
+            updatedCredentials.CASA_PASS = !string.IsNullOrEmpty(updatedCredentials.CASA_PASS) ? AlgorithmAES.EncryptString(updatedCredentials.CASA_PASS) : null;
+            updatedCredentials.MOZART_PASS = !string.IsNullOrEmpty(updatedCredentials.MOZART_PASS) ? AlgorithmAES.EncryptString(updatedCredentials.MOZART_PASS) : null;
+            updatedCredentials.DARWIN_PASS = !string.IsNullOrEmpty(updatedCredentials.DARWIN_PASS) ? AlgorithmAES.EncryptString(updatedCredentials.DARWIN_PASS) : null;
+            updatedCredentials.VPN_PASS = !string.IsNullOrEmpty(updatedCredentials.VPN_PASS) ? AlgorithmAES.EncryptString(updatedCredentials.VPN_PASS) : null;
             context.Update(updatedCredentials);
             updatedEmails.PASS_1 = !string.IsNullOrEmpty(updatedEmails.PASS_1) ? AlgorithmAES.EncryptString(updatedEmails.PASS_1) : null;
             updatedEmails.PASS_2 = !string.IsNullOrEmpty(updatedEmails.PASS_2) ? AlgorithmAES.EncryptString(updatedEmails.PASS_2) : null;

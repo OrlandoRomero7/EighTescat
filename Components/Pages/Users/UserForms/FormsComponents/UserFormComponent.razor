@@ -1,8 +1,8 @@
-﻿
+﻿@using Microsoft.AspNetCore.Components.Forms
 <EditForm Model="@completeUserData" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+    <FluentValidationValidator />
 
-
-
+    
 
     @if (User is not null)
     {
@@ -30,7 +30,7 @@
     @if (Emails is not null)
     {
         <FormSection Title="Emails">
-
+            
             <EmailFields Emails="Emails" />
 
         </FormSection>
@@ -120,8 +120,11 @@
     private string? UploadStyles;
 
 
+    //private EditContext editContextCompleteUserData;
 
+    private string displaySummary = "display:none";
 
+    private bool isValid = false;
 
     protected override void OnInitialized()
     {
@@ -130,10 +133,10 @@
         completeUserData.Credentials = Credentials;
         completeUserData.Emails = Emails;
         completeUserData.Computers = Computers;
+        // editContextCompleteUserData = new(completeUserData);
+        // editContextCompleteUserData.OnFieldChanged += HandleFieldChanged;
 
     }
-
-
 
     private void HandleFileUpload(string path)
     {
@@ -188,9 +191,10 @@
         ? "Cambiar" : "Agregar";
     }
 
-
-    private async Task HandleValidSubmit()
+    private async Task HandleValidSubmit(EditContext editContext)
     {
+
+
         if (userPictureUploadRef != null)
         {
             await userPictureUploadRef.SubmitImage();
@@ -201,10 +205,11 @@
         {
             User.IMAGE_NAME = imageFilePath;
         }
-
+        
         if (OnSubmit.HasDelegate)
         {
             await OnSubmit.InvokeAsync(true);
+
         }
 
     }
@@ -226,4 +231,5 @@
         }
 
     }
+    
 }
