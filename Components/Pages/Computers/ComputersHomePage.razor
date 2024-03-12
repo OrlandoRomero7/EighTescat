@@ -32,6 +32,23 @@
 
             </div>
 
+
+            <div class="searchbox shadow-sm options @optionsBoxStatusStyles()" tabindex="10">
+
+                <i class="material-symbols-rounded search-icon">view_column</i>
+                <div class="columns-options-container" style="background:@optionOneCheckedColor()">
+                    <input @bind="optionOneChecked" type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                    <label class="btn btn-primary " for="btn-check">Memoria RAM</label>
+                    <span class="material-symbols-outlined @optionOneCheckedIcon()" @onclick="(() => optionOneChecked = !optionOneChecked)">add</span>
+
+                </div>
+                <div class="columns-options-container" style="background:@optionTwoCheckedColor()">
+                    <input @bind="optionTwoChecked" type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off">
+                    <label class="btn btn-primary" for="btn-check-2">Almacenamiento</label>
+                    <span class="material-symbols-outlined @optionTwoCheckedIcon()" @onclick="(() => optionTwoChecked = !optionTwoChecked)">add</span>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -79,7 +96,7 @@
             </PropertyColumn>
 
 
-            <PropertyColumn Align=Align.Center Property="@(c => c.PC_TYPE)" Sortable="true" Title="Tipo" />
+            <PropertyColumn Align=Align.Center Property="@(c => ComputerType(c.PC_TYPE))" Sortable="true" Title="Tipo" Class="type" />
 
 
             <PropertyColumn Align=Align.Center Property="@(c => ComputerOffice(c.ID_USER))" Sortable="true" Title="Oficina" />
@@ -95,6 +112,26 @@
 
             </TemplateColumn>
 
+
+
+            @if (optionOneChecked)
+            {
+                <TemplateColumn Title="" Align="Align.Center" SortBy="@sortUserId" Class="first-column status">
+                    <svg width='20' height='20'>
+                        <circle cx='10' cy='10' r='7.5' fill='@(computerStatusColor(context.ID_USER))' />
+                    </svg>
+                </TemplateColumn>
+            }
+
+
+            @if (optionTwoChecked)
+            {
+                <TemplateColumn Title="" Align="Align.Center" SortBy="@sortUserId" Class="first-column status">
+                    <svg width='20' height='20'>
+                        <circle cx='10' cy='10' r='7.5' fill='@(computerStatusColor(context.ID_USER))' />
+                    </svg>
+                </TemplateColumn>
+            }
 
         </QuickGrid>
     </div>
@@ -137,6 +174,12 @@
     string? computerNameFilter;
     string? userNameFilter;
     string? concatenatedFilters;
+
+    bool optionOneChecked = false;
+
+    bool optionTwoChecked = false;
+
+
 
     protected override async
     Task OnInitializedAsync()
@@ -193,10 +236,13 @@
                     concatenatedFilters.Split(" ", StringSplitOptions.RemoveEmptyEntries)
                                            .All(filter =>
                                            c.PC_NAME.Contains(filter, StringComparison.CurrentCultureIgnoreCase) ||
-                                           ComputerUser(c.ID_USER).Contains(filter, StringComparison.CurrentCultureIgnoreCase))
+                                           ComputerUser(c.ID_USER).Contains(filter, StringComparison.CurrentCultureIgnoreCase) ||
+                                           ComputerAnyDeskID(c.ID_PC).Contains(filter, StringComparison.CurrentCultureIgnoreCase) ||
+                                           ComputerOffice(c.ID_USER).Contains(filter, StringComparison.CurrentCultureIgnoreCase) ||
+                                           ComputerType(c.PC_TYPE).Contains(filter, StringComparison.CurrentCultureIgnoreCase))
+
                 );
             }
-
 
 
             if (!string.IsNullOrEmpty(computerNameFilter))
@@ -231,15 +277,80 @@
 
     string? searchBoxStatusStyles()
     {
-        var searchBoxWidth = "";
-
 
         if (!string.IsNullOrEmpty(currentFilter))
         {
-            searchBoxWidth = "using";
+            return "using";
 
         }
-        return searchBoxWidth;
+        else
+            return string.Empty;
+    }
+
+
+
+
+    string? optionOneCheckedColor()
+    {
+
+        if (optionOneChecked)
+        {
+            return "var(--brand-text)";
+
+        }
+        else
+            return string.Empty;
+    }
+
+    string? optionTwoCheckedColor()
+    {
+
+        if (optionTwoChecked)
+        {
+            return "var(--brand-text)";
+
+        }
+        else
+            return string.Empty;
+    }
+
+    string? optionOneCheckedIcon()
+    {
+
+        if (optionOneChecked)
+        {
+            return "checked";
+
+        }
+        else
+            return string.Empty;
+    }
+
+    string? optionTwoCheckedIcon()
+    {
+
+        if (optionTwoChecked)
+        {
+            return "checked";
+
+        }
+        else
+            return string.Empty;
+    }
+
+
+
+
+
+    string? optionsBoxStatusStyles()
+    {
+        if (optionOneChecked || optionTwoChecked)
+        {
+            return "using-options";
+        }
+        else
+
+            return string.Empty;
     }
 
     string computerStatusColor(int? userId)
@@ -262,6 +373,20 @@
         else
         {
             return string.Empty;
+        }
+    }
+
+
+    string ComputerType(string? computerType)
+    {
+        if (computerType != null && computerType.ToLower() == "pc")
+        {
+            return "Escritorio";
+        }
+        else
+        {
+            // Aquí puedes manejar otros casos si es necesario
+            return computerType;
         }
     }
 

@@ -2,21 +2,26 @@
     <i class="material-symbols-outlined search-icon">search</i>
     <input type="text"
            placeholder="Nombre, Puesto, Depart..."
-           @bind:event="oninput"
+           @onkeydown="SearchForUser"
            @bind="_searchTerm"
            @ref="inputElement"
-           @onkeydown="SearchForUser"
            @onblur="HandleDivClick"
            @onfocus="HandleInputFocus"
-          >
+           @bind:event="oninput">
+
+    <span class="button-3d @enterButtonAnimation()">Enter</span>
 </div>
 
 @code {
     [Parameter] public EventCallback<string> OnDivClicked { get; set; }
-    [Parameter] public EventCallback<string> OnSearch { get; set; }
     [Parameter] public EventCallback<FocusEventArgs> OnInputFocus { get; set; }
-    private string _searchTerm = string.Empty;
+    [Parameter] public EventCallback<string> OnSearch { get; set; }
+
     private ElementReference inputElement;
+
+
+    private string _searchTerm = string.Empty;
+
 
     private async Task HandleDivClick()
     {
@@ -24,20 +29,18 @@
         _searchTerm = string.Empty;
     }
 
-    private void HandleInputFocus(FocusEventArgs e)
-    {
-        OnInputFocus.InvokeAsync(e);
-    }
+    private void HandleInputFocus(FocusEventArgs e) => OnInputFocus.InvokeAsync(e);
+
+
+    string enterButtonAnimation() => string.IsNullOrEmpty(_searchTerm) ? string.Empty : "typing";
+
 
     private async Task SearchForUser(KeyboardEventArgs args)
     {
-        if (args.Key != "Enter") return;
+        if (args.Key != "Enter" || string.IsNullOrEmpty(_searchTerm))
+            return;
 
-        if (!string.IsNullOrEmpty(_searchTerm))
-        {
-            await OnSearch.InvokeAsync(_searchTerm);
-            Console.WriteLine(_searchTerm);
-        }
+        await OnSearch.InvokeAsync(_searchTerm);
     }
 
 }

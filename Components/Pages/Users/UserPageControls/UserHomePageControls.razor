@@ -1,10 +1,9 @@
-﻿
-@inject NavigationManager NavigationManager
+﻿@inject NavigationManager NavigationManager
 
 
 <div class="controls-container" style="display: flex; justify-content: flex-end;  margin-bottom: 2%;">
 
-    <div class="user-buttons-box">
+    <div class="user-buttons-box shadow-lg">
 
         <button type="button" class="btn btn-primary" style="margin-right:.5rem;" @onclick="@(e => CombinedClickHandler(e, RippleType.Add))">
             <i class="bi bi-plus" style="padding-top:2px;"></i>
@@ -48,6 +47,7 @@
 
         </button>
 
+        @* sliding indicator *@
         <span class="user-buttons-box-indicator @(showIndicator ? "indicator-active" : "")" style="right: @indicatorRight; width:@indicatorWidth;"></span>
 
 
@@ -201,11 +201,11 @@
     {
 
         var queryParameters = new Dictionary<string, object?>()
-        {
-            [nameof(UserHomePage.UserOffice)] = string.IsNullOrEmpty(userOffice) ? null : userOffice,
-        };
+            {
+                [nameof(UserHomePage.UserOffice)] = string.IsNullOrEmpty(userOffice) ? null : userOffice,
+            };
 
-        if (userLength.HasValue && userLength != 0 )
+        if (userLength.HasValue && userLength != 0)
         {
             queryParameters.Add(nameof(UserHomePage.UserLength), userLength);
         }
@@ -224,6 +224,6 @@
 
     }
 
- 
+
 
 }
