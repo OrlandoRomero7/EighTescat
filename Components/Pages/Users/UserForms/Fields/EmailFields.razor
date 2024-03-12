@@ -29,7 +29,15 @@
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Contraseña">
                         <div class="input-group mb-3">
-                            <InputText class="form-control" type="@inputType" @bind-Value="Emails.PASS_1" maxlength="20"/>
+                            @if (inputType == "password")
+                            {
+                                <InputText class="form-control" type="@inputType" @bind-Value="Emails.PASS_1" maxlength="20" readonly/>
+                            }
+                            else
+                            {
+                                <InputText class="form-control" type="@inputType" @bind-Value="Emails.PASS_1" maxlength="20" />
+                            }
+                            
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" @onclick="()=>TogglePasswordVisibility(1)">
                                     <i class="@iconClass"></i>
@@ -225,7 +233,8 @@
     public string initialStatePass1;
     public string initialStatePass2;
     public string initialStatePass3;
-
+    public string shortPassword1;
+    private bool firstRender;
 
     protected override void OnInitialized()
     {
@@ -235,6 +244,7 @@
             accountOneDisplay = true;
             accountCounter = 1;
             initialStatePass1 = Emails.PASS_1;
+            shortPassword1 = FirstSixCharacters(Emails.PASS_1);
             //se necesita saber el estado inicial del password
             //variables["initialStatePass1"] = Emails.PASS_1;
         }
@@ -253,51 +263,62 @@
             accountCounter = 3;
             initialStatePass3 = Emails.PASS_3;
         }
+        firstRender = true;
     }
 
     protected override void OnParametersSet()
     {
-        //if (initalStatePass1 != Emails.PASS_1)
-        // if (string.IsNullOrEmpty(Emails.PASS_1))
-        // {
-        //     initialStatePass1 = String.Empty;
-        // }
-        // if (string.IsNullOrEmpty(Emails.PASS_2))
-        // {
-        //     initialStatePass2 = String.Empty;
-        // }
-        // if (string.IsNullOrEmpty(Emails.PASS_3))
-        // {
-        //     initialStatePass3 = String.Empty;
-        // }
-        if (Emails.PASS_1 != null && Emails.PASS_1!="" && initialStatePass1 != Emails.PASS_1)
+        if (!firstRender)
         {
-            initialStatePass1 = Emails.PASS_1;
-            if (inputType=="text")
+            if (Emails.PASS_1 != null && Emails.PASS_1 != "" && initialStatePass1 != Emails.PASS_1)
             {
-                inputType = "password";
+                initialStatePass1 = Emails.PASS_1;
+                Emails.PASS_1 = FirstSixCharacters(Emails.PASS_1);
+                if (inputType == "text")
+                {
+                    inputType = "password";
+                }
+            }
+            if (Emails.PASS_2 != null && Emails.PASS_2 != "" && initialStatePass2 != Emails.PASS_2)
+            {
+                initialStatePass2 = Emails.PASS_2;
+
+                if (inputType2 == "text")
+                {
+                    inputType2 = "password";
+                }
+
+            }
+            if (Emails.PASS_3 != null && Emails.PASS_3 != "" && initialStatePass3 != Emails.PASS_3)
+            {
+                initialStatePass3 = Emails.PASS_3;
+                if (inputType3 == "text")
+                {
+                    inputType3 = "password";
+                }
             }
         }
-        if (Emails.PASS_2 != null && Emails.PASS_2 != "" && initialStatePass2 != Emails.PASS_2)
+        else
         {
-            initialStatePass2 = Emails.PASS_2;
-
-            if (inputType2 == "text")
-            {
-                inputType2 = "password";
-            }
-
+            firstRender = false;
         }
-        if (Emails.PASS_3 != null && Emails.PASS_3 != "" && initialStatePass3 != Emails.PASS_3)
-        {
-            initialStatePass3 = Emails.PASS_3;
-            if (inputType3 == "text")
-            {
-                inputType3 = "password";
-            }
-        }
-
     }
+
+    public string FirstSixCharacters(string texto)
+    {
+        if (texto.Length > 10)
+        {
+            return texto.Substring(0, 10);
+        }
+        else
+        {
+            return texto;
+        }
+    }
+    // public void QuitarValidacion()
+    // {
+    //     Emails.PASS_1 = Emails.PASS_1;
+    // }
 
 
     private void activatingAccounts()
@@ -397,7 +418,8 @@
         switch (number)
         {
             case 1:
-                email = Emails.PASS_1;
+                email = initialStatePass1;
+                Console.WriteLine("++++++++++++++++" + initialStatePass1);
                 initialState = initialStatePass1;
                 inputTypeUniv = inputType;
                 break;
@@ -476,7 +498,7 @@
     public void ReturnStateInitial(int number,string initialState)
     {
         if (number == 1) Emails.PASS_1 = initialState;
-        else if (number == 2) Emails.PASS_1 = initialState;
+        else if (number == 2) Emails.PASS_2 = initialState;
         else Emails.PASS_3 = initialState;
 
         // switch (number)
