@@ -14,6 +14,34 @@ h6.card-subtitle {
     display: inline-block;
 }
 
+button.btn.btn-outline-primary {
+    font-size: 1.25rem;
+    border-radius: 6px
+}
+
+.details-button-container {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    bottom: 5.5rem;
+    z-index: 3
+}
+
+@media (max-width: 1350px) {
+
+    .details-button-container {
+        bottom: 7.5rem;
+    }
+
+    @media (max-width: 1240px) {
+        button.btn.btn-outline-primary {
+            font-size: 16px;
+        }
+    }
+}
+
+
 .card-body h6 {
     font-size: 18px;
     display: inline-block;
@@ -24,6 +52,9 @@ small.text-details {
     color: var(--brand-text);
     /*   font-weight:600;*/
 }
+
+
+
 
 
 .card-body {
