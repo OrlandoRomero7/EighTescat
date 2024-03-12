@@ -21,7 +21,7 @@ namespace TescatGlobalServer.Data.Models
 
         public int? LAST_USER { get; set; }
 
-        //public virtual ICollection<MemoryRam> Memory_RAM { get; set; } = new List<MemoryRam>();
+        public virtual ICollection<MemoryRam> Memory_RAM { get; set; } = new List<MemoryRam>();
 
     }
 }

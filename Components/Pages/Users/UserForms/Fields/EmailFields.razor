@@ -18,7 +18,7 @@
             <div class="col">
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Usuario">
-                        <InputText class="form-control" @bind-Value="Emails.EMAIL_1" />
+                        <InputText class="form-control" id="kk123" @bind-Value="Emails.EMAIL_1" maxlength="50" />
                         <ValidationMessage For="() => Emails.EMAIL_1" />
                     </FormFieldSet>
 
@@ -29,15 +29,15 @@
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Contraseña">
                         <div class="input-group mb-3">
-                            <InputText  class="form-control" type="@inputType" @bind-Value="Emails.PASS_1" />
+                            <InputText class="form-control" type="@inputType" @bind-Value="Emails.PASS_1" maxlength="20"/>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" @onclick="()=>TogglePasswordVisibility(1)">
                                     <i class="@iconClass"></i>
                                 </button>
                             </div>
+                            <ValidationMessage For="() => Emails.PASS_1" />
                         </div>
-
-                        <ValidationMessage For="() => Emails.PASS_1" />
+                        
                     </FormFieldSet>
                 </div>
             </div>
@@ -81,7 +81,7 @@
             <div class="col">
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Usuario">
-                        <InputText class="form-control" @bind-Value="Emails.EMAIL_2" />
+                        <InputText class="form-control" @bind-Value="Emails.EMAIL_2" maxlength="50" />
                         <ValidationMessage For="() => Emails.EMAIL_2" />
                     </FormFieldSet>
 
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Contraseña">
                         <div class="input-group mb-3">
-                            <InputText class="form-control" type="@inputType2" @bind-Value="Emails.PASS_2" />
+                            <InputText class="form-control" type="@inputType2" @bind-Value="Emails.PASS_2" maxlength="20" />
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" @onclick="()=>TogglePasswordVisibility(2)">
                                     <i class="@iconClass2"></i>
@@ -143,7 +143,7 @@
             <div class="col">
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Usuario">
-                        <InputText class="form-control" @bind-Value="Emails.EMAIL_3" />
+                        <InputText class="form-control" @bind-Value="Emails.EMAIL_3" maxlength="50" />
                         <ValidationMessage For="() => Emails.EMAIL_3" />
                     </FormFieldSet>
 
@@ -154,7 +154,7 @@
                 <div class="form-group">
                     <FormFieldSet Width="col" Label="Contraseña">
                         <div class="input-group mb-3">
-                            <InputText id="password" class="form-control" type="@inputType3" @bind-Value="Emails.PASS_3" />
+                            <InputText id="password" class="form-control" type="@inputType3" @bind-Value="Emails.PASS_3" maxlength="20" />
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" @onclick="()=>TogglePasswordVisibility(3)">
                                     <i class="@iconClass3"></i>
@@ -220,13 +220,11 @@
 
     private int accountCounter;
     @*varaibles necesarias para la encriptacion*@
-    public Dictionary<string, string> variables = new Dictionary<string, string>();
+    // public Dictionary<string, string> variables = new Dictionary<string, string>();
     public string passTemp;
     public string initialStatePass1;
     public string initialStatePass2;
     public string initialStatePass3;
-
-    public string variableActiva;
 
 
     protected override void OnInitialized()
@@ -246,7 +244,6 @@
             accountTwoDisplay = true;
             accountCounter = 2;
             initialStatePass2 = Emails.PASS_2;
-            //variables["initialStatePass2"] = Emails.PASS_2;
         }
         if (!String.IsNullOrEmpty(Emails.EMAIL_3) || !String.IsNullOrEmpty(Emails.PASS_3))
         {
@@ -255,32 +252,51 @@
             accountThreeDisplay = true;
             accountCounter = 3;
             initialStatePass3 = Emails.PASS_3;
-            //variables["initialStatePass3"] = Emails.PASS_3;
         }
     }
-    ///////////No usar esto en el OnParamterSet
-    // if (inputType == "text")
-    // {
-    //     inputType = "password";
-    // }
-    // Y tampoco StateHasChanged();
-    ////////////////////////////////
+
     protected override void OnParametersSet()
     {
         //if (initalStatePass1 != Emails.PASS_1)
-        if (string.IsNullOrEmpty(Emails.PASS_1))
+        // if (string.IsNullOrEmpty(Emails.PASS_1))
+        // {
+        //     initialStatePass1 = String.Empty;
+        // }
+        // if (string.IsNullOrEmpty(Emails.PASS_2))
+        // {
+        //     initialStatePass2 = String.Empty;
+        // }
+        // if (string.IsNullOrEmpty(Emails.PASS_3))
+        // {
+        //     initialStatePass3 = String.Empty;
+        // }
+        if (Emails.PASS_1 != null && Emails.PASS_1!="" && initialStatePass1 != Emails.PASS_1)
         {
-            initialStatePass1 = String.Empty;
+            initialStatePass1 = Emails.PASS_1;
+            if (inputType=="text")
+            {
+                inputType = "password";
+            }
         }
-        if (string.IsNullOrEmpty(Emails.PASS_2))
+        if (Emails.PASS_2 != null && Emails.PASS_2 != "" && initialStatePass2 != Emails.PASS_2)
         {
-            initialStatePass2 = String.Empty;
+            initialStatePass2 = Emails.PASS_2;
+
+            if (inputType2 == "text")
+            {
+                inputType2 = "password";
+            }
+
         }
-        if (string.IsNullOrEmpty(Emails.PASS_3))
+        if (Emails.PASS_3 != null && Emails.PASS_3 != "" && initialStatePass3 != Emails.PASS_3)
         {
-            initialStatePass3 = String.Empty;
+            initialStatePass3 = Emails.PASS_3;
+            if (inputType3 == "text")
+            {
+                inputType3 = "password";
+            }
         }
-        
+
     }
 
 
@@ -384,7 +400,6 @@
                 email = Emails.PASS_1;
                 initialState = initialStatePass1;
                 inputTypeUniv = inputType;
-                //emailToBind = $"Email.PASS_{1}";
                 break;
             case 2:
                 email = Emails.PASS_2;
@@ -404,35 +419,25 @@
                 passTemp = AlgorithmAES.DecryptString(email);
                 if (!string.IsNullOrEmpty(passTemp))
                 {
-                    if (number == 1) inputType = "text";
-                    if (number == 2) inputType2 = "text";
-                    if (number == 3) inputType3 = "text";
+                    AssingInputType(number, "text");
                     AssignPassTemp(number, passTemp);
-                    //Emails.PASS_1 = passTemp;
                 }
             }
             else
             {
-                if (number == 1) inputType = "text";
-                if (number == 2) inputType2 = "text";
-                if (number == 3) inputType3 = "text";
+                AssingInputType(number, "text");
             }
         }
         else
         {
             if (string.IsNullOrEmpty(initialState))
             {
-                if (number == 1) inputType = "password";
-                if (number == 2) inputType2 = "password";
-                if (number == 3) inputType3 = "password";
+                AssingInputType(number, "password");
             }
             else
             {
-                if (number == 1) inputType = "password";
-                if (number == 2) inputType2 = "password";
-                if (number == 3) inputType3 = "password";
+                AssingInputType(number, "password");
                 ReturnStateInitial(number,initialState);
-                //Emails.PASS_1 = initialState;
             }
         }
         if (number == 1) iconClass = inputType == "password" ? "bi bi-eye" : "bi bi-eye-slash";
@@ -441,36 +446,51 @@
 
 
     }
+
+    public void AssingInputType(int number,string type)
+    {
+        if (number == 1) inputType = type;
+        else if (number == 2) inputType2 = type;
+        else inputType3 = type;
+    }
     public void AssignPassTemp(int number, string passTemp)
     {
-        switch (number)
-        {
-            case 1:
-                Emails.PASS_1 = passTemp;
-                break;
-            case 2:
-                Emails.PASS_2 = passTemp;
-                break;
-            case 3:
-                Emails.PASS_3 = passTemp;
-                break;
-        }
+        if (number == 1) Emails.PASS_1 = passTemp;
+        else if (number == 2) Emails.PASS_2 = passTemp;
+        else Emails.PASS_3 = passTemp;
+
+        // switch (number)
+        // {
+        //     case 1:
+        //         Emails.PASS_1 = passTemp;
+        //         break;
+        //     case 2:
+        //         Emails.PASS_2 = passTemp;
+        //         break;
+        //     case 3:
+        //         Emails.PASS_3 = passTemp;
+        //         break;
+        // }
 
     }
     public void ReturnStateInitial(int number,string initialState)
     {
-        switch (number)
-        {
-            case 1:
-                Emails.PASS_1 = initialState;
-                break;
-            case 2:
-                Emails.PASS_2 = initialState;
-                break;
-            case 3:
-                Emails.PASS_3 = initialState;
-                break;
-        }
+        if (number == 1) Emails.PASS_1 = initialState;
+        else if (number == 2) Emails.PASS_1 = initialState;
+        else Emails.PASS_3 = initialState;
+
+        // switch (number)
+        // {
+        //     case 1:
+        //         Emails.PASS_1 = initialState;
+        //         break;
+        //     case 2:
+        //         Emails.PASS_2 = initialState;
+        //         break;
+        //     case 3:
+        //         Emails.PASS_3 = initialState;
+        //         break;
+        // }
     }
 
 

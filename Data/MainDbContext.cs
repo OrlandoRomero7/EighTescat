@@ -45,11 +45,9 @@ namespace TescatGlobalServer.Data
                .HasKey(c => c.USER_EMAILS_ID);
 
 
-            modelBuilder.Entity<UserPC>(entity =>
-            {
-                entity.HasKey(d => d.ID_PC);
-            });
-                
+            modelBuilder.Entity<UserPC>()
+                .HasKey(d => d.ID_PC);
+
 
             modelBuilder.Entity<ComputerCredentials>()
                 .HasKey(d => d.ID_PC);
@@ -57,14 +55,14 @@ namespace TescatGlobalServer.Data
             modelBuilder.Entity<Storage>()
                 .HasKey(d => d.ID_STORAGE);
 
-            modelBuilder.Entity<MemoryRam>()
-                .HasKey(e => e.ID_RAM);
-
-          
+            modelBuilder.Entity<MemoryRam>(entity =>
+            {
+                entity.HasKey(e => e.ID_RAM);
+                entity.HasOne(d => d.IdPcNavigation).WithMany(p => p.Memory_RAM)
+                    .HasForeignKey(d => d.ID_PC)
+                    .HasConstraintName("FK_Memory_RAM_PC");
+            });
                 
-
-
-
         }
 
     }
