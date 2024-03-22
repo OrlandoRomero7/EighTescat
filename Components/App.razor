@@ -27,6 +27,53 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <!-- This is the glue between Blazor and Chart.js -->
     <script src="_content/ChartJs.Blazor.Fork/ChartJsBlazorInterop.js"></script>
+
+  
+
+
+    <script>
+
+        function disableVerticalScroll() {
+            document.documentElement.style.overflowY = 'hidden';
+        }
+
+        function enableVerticalScroll() {
+            document.documentElement.style.overflowY = 'initial';
+        }
+
+    </script>
+
+
+    
+    <script>
+        function initToggleButtonVisibility() {
+            // Initial check for button visibility
+            toggleButtonVisibility();
+
+            // Register the scroll event listener
+            window.addEventListener('scroll', toggleButtonVisibility);
+        }
+
+        function toggleButtonVisibility() {
+            var header = document.querySelector('.header-container');
+            var button = document.querySelector('.scroll-to-top-button');
+            var headerBounds = header.getBoundingClientRect();
+
+            // Check if the header is out of the viewport
+            if (headerBounds.bottom < 0) {
+                button.style.opacity = '1';
+                button.style.visibility = 'visible';// Show button
+            } else {
+                button.style.opacity = '0'; // Hide button
+            }
+        }
+
+
+
+    </script>
+
+
+    
 </body>
 
 </html>

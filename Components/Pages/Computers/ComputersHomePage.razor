@@ -5,7 +5,7 @@
 <PageTitle>Equipos - Project Tescatlipoca</PageTitle>
 
 
-<div class="container shadow">
+<div class="container">
 
     <div class="grid-controlers-header">
         <div class="grid-controlers-header-left @computerStatusStyles">
@@ -67,7 +67,7 @@
             }
 
 
-            <PropertyColumn Align=Align.Left Property="@(c => c.PC_NAME)" Sortable="true" Title="Equipo" Class="first-column">
+            <PropertyColumn Align=Align.Left Property="@(c => c.PC_NAME)" Sortable="true" InitialSortDirection="SortDirection.Ascending" Title="Equipo" Class="first-column">
                 <ColumnOptions>
                     <div class="search-box">
                         <input type="search" autofocus
@@ -80,10 +80,14 @@
             </PropertyColumn>
 
 
-            <PropertyColumn Align=Align.Left Property="@(c => LongDateFormat(c.LAST_MAINT))" Sortable="true" Title="Ultimo Mantenimiento" Class="first-column mantt-date" />
+            <PropertyColumn Align=Align.Left Property="@(c => LongDateFormat(c.LAST_MAINT))" Sortable="true" Title="Ultimo Mantenimiento" Class="second-column mantt-date" />
 
 
-            <PropertyColumn Align="Align.Center" Property="@(c => ComputerUser(c.ID_USER))" Sortable="true" Title="Usuario" Class="user-name" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending">
+
+            <TemplateColumn Align="Align.Center" Title="Usuario" SortBy="@sortUserId" Sortable="true" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending" Class="user-name">
+
+
+
                 <ColumnOptions>
                     <div class="search-box">
                         <input type="search" autofocus
@@ -93,7 +97,28 @@
                                @onblur="userSetSearchBlur" />
                     </div>
                 </ColumnOptions>
-            </PropertyColumn>
+
+
+                <ChildContent>
+                    @if (context.ID_USER.HasValue)
+                    {
+                        <a @onclick="() => UserDetails(context.ID_USER)">
+
+                            @ComputerUser(context.ID_USER)
+
+                        </a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline-primary">
+                            Asignar
+                        </button>
+                    }
+                </ChildContent>
+
+
+            </TemplateColumn>
+
 
 
             <PropertyColumn Align=Align.Center Property="@(c => ComputerType(c.PC_TYPE))" Sortable="true" Title="Tipo" Class="type" />
@@ -102,13 +127,14 @@
             <PropertyColumn Align=Align.Center Property="@(c => ComputerOffice(c.ID_USER))" Sortable="true" Title="Oficina" />
 
 
-            <TemplateColumn Align="Align.Center" Title="ID Anydesk" Sortable="true">
+            <TemplateColumn Align="Align.Center" Title="ID Anydesk" Sortable="false">
 
                 <a href="anydesk:@ComputerAnyDeskID(context.ID_PC)">
 
                     @ComputerAnyDeskID(context.ID_PC)
 
                 </a>
+
 
             </TemplateColumn>
 
@@ -132,6 +158,18 @@
                     </svg>
                 </TemplateColumn>
             }
+
+
+
+
+            <TemplateColumn Align="Align.Center" Title="Editar Usuario" Sortable="false" Class="edit-button-column">
+
+                <button class="btn btn-primary" @onclick="() => UserDetails(context.ID_USER)">
+                    Editar
+                </button>
+
+
+            </TemplateColumn>
 
         </QuickGrid>
     </div>
@@ -391,17 +429,21 @@
     }
 
 
+
+
     string ComputerUser(int? userId)
     {
-        if (userId.HasValue && Users != null)
-        {
+        var user = Users?.FirstOrDefault(u => u.ID_USER == userId);
+        return user?.NAME ?? "";
 
-            var user = Users.FirstOrDefault(u => u.ID_USER == userId);
-            return user?.NAME ?? "INACTIVO";
-        }
 
-        return "";
     }
+
+    protected void UserDetails(int? id)
+    {
+        NavigationManager.NavigateTo("/users/details/" + id);
+    }
+
 
 
     string ComputerOffice(int? userId)

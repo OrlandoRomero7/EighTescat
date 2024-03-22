@@ -1,6 +1,6 @@
 ﻿@using System.Text.RegularExpressions
 @inherits LayoutComponentBase
-@* @inject IJSRuntime JSRuntime *@
+@inject IJSRuntime JSRuntime 
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 
@@ -34,13 +34,11 @@
 
 
 
-
-
         <MainModal @ref="showingModal" DeletingUser="OnDeletingUser"></MainModal>
 
 
         <CascadingValue Value="showingModal">
-            <main class="container @PageTransition" style="max-width:100%; margin-top:56px; margin-bottom:56px">
+            <main class="container @PageTransition" style="max-width:100%; margin-top:60px;">
 
                 @Body
 
@@ -52,6 +50,11 @@
         <button class="scroll-to-top-button shadow" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">
             <i style="font-size:1.5rem" class="bi bi-arrow-up-short"></i>
         </button>
+
+
+@* 
+        <MainFooter></MainFooter> *@
+
 
     </div>
 </CascadingAuthenticationState>
@@ -80,14 +83,8 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-
-
-        // string currentUrl = NavigationManager.Uri;
         bool isUserRoute = false;
-        // isUserRoute = System.Text.RegularExpressions.Regex.IsMatch(currentUrl, @"/pcDetails/[a-fA-F0-9-]+");
-
-        //var isInUsersRoute = NavigationManager.Uri.EndsWith("/users", StringComparison.OrdinalIgnoreCase);
-
+       
         // Verifica si la ruta actual está en la lista de rutas exentas
         if (!user.Identity.IsAuthenticated && !isUserRoute)
         {
@@ -153,7 +150,7 @@
             PageTransition = "visible-transition";
             StateHasChanged();
 
-            // await JSRuntime.InvokeVoidAsync("initToggleButtonVisibility");
+             await JSRuntime.InvokeVoidAsync("initToggleButtonVisibility");
 
 
         }
@@ -162,7 +159,7 @@
 
     public void toggleButtonVisibility()
     {
-        // JSRuntime.InvokeVoidAsync("toggleButtonVisibility");
+         JSRuntime.InvokeVoidAsync("toggleButtonVisibility");
     }
 
 
@@ -190,9 +187,9 @@
     }
     public void Dispose()
     {
-        // JSRuntime.InvokeVoidAsync("window.removeEventListener", "scroll", DotNetObjectReference.Create(new Action(toggleButtonVisibility)));
+         JSRuntime.InvokeVoidAsync("window.removeEventListener", "scroll", DotNetObjectReference.Create(new Action(toggleButtonVisibility)));
 
-        NavigationManager.LocationChanged -= HandleLocationChanged; // Unsubscribe to avoid memory leaks
+        NavigationManager.LocationChanged -= HandleLocationChanged; // Unsubscribe 
 
 
     }

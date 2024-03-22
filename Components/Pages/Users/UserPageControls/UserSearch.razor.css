@@ -94,8 +94,8 @@ i .search-icon {
     background-color: #052438;
     text-align: center;
     padding: -1px 6.5px 4px 6.5px;
-    margin-top: -5px;
-    margin-right: 6px;
+    margin-top: -6px;
+    margin-right: 12px;
     cursor: pointer;
     opacity: 0;
 }
