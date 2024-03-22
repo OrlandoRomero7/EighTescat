@@ -3,7 +3,7 @@
 }
 
 .home-card {
-    color:var(--brand-text);
+    color: var(--brand-text);
     width: 38%;
     border-radius: 0.75rem;
     margin-bottom: 6rem;
@@ -12,7 +12,7 @@
 
 .card-layout {
     padding-top: 1rem;
- /*   padding-bottom: 1rem;*/
+    /*   padding-bottom: 1rem;*/
 }
 
 h5.card-title {
@@ -21,7 +21,7 @@ h5.card-title {
 }
 
 .card-content {
-    height: 8rem;
+    /*    height: 8rem;*/
     font-size: 1rem;
     font-weight: 600;
 }

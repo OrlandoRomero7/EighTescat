@@ -13,22 +13,38 @@
         /*   color: blue !important;*/
     }
 
+
 /*  ::deep .quickgrid[theme=tescat] button.col-title:hover, ::deep .quickgrid[theme=tescat] .col-options-button:hover {
         background-color: var(--brand);
     }*/
-
 /*  ::deep .quickgrid[theme=tescat] button.col-title:active, ::deep .quickgrid[theme=tescat] .col-options-button:active {
         background-color: var(--brand-hover);
     }*/
-
 ::deep .col-options {
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
 ::deep th {
     width: 13rem;
     max-width: 19rem;
 }
+
+::deep .page-size-chooser select {
+    border: 1px solid rgb(6 21 31 / .25);
+    border-radius: 6px;
+}
+
+::deep td.edit-button-column button {
+    background: var(--brand);
+    padding: 8px 24px;
+    letter-spacing: 1px;
+}
+
+    ::deep td.edit-button-column button:focus {
+        background: var(--brand-hover);
+        padding: 6px 18px;
+        color: var(--plain-white);
+    }
 
 ::deep td {
     width: 13rem;
@@ -39,10 +55,20 @@
         color: var(--brand-text);
     }
 
-        ::deep td a:hover {
-            color: #ef443b;
-            font-weight: 500;
-        }
+    ::deep td.user-name a:hover {
+        color: var(--brand);
+        font-weight: 500;
+    }
+
+
+    ::deep td a:hover {
+        color: #ef443b;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+
+
 
 ::deep tr {
     height: 5rem;
@@ -57,13 +83,18 @@
 /* Magnifying glass */
 ::deep .user-name .col-options-button {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
-    margin-right: .5rem;
+    transform: translateX(68px);
+    z-index: 5;
 }
 
 ::deep .first-column .col-options-button {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> </svg>');
-    margin-right: .5rem;
+    transform: translateX(-12.5px);
+    z-index: 5;
 }
+
+
+
 
 
 ::deep thead > tr:first-child {
@@ -82,9 +113,70 @@
 }
 
 ::deep th.first-column .col-header-content {
-    justify-content: flex-start;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
 }
 
+    ::deep th.first-column .col-header-content button.col-title {
+        gap: 0px;
+    }
+    ::deep th.second-column .col-header-content button.col-title {
+        gap: 0px;
+    }
+
+::deep th.user-name .col-header-content button.col-title {
+    gap: 0px;
+}
+
+
+::deep th.col-sort-asc .col-header-content button.col-title .sort-indicator {
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
+
+::deep th.col-sort-desc .col-header-content button.col-title .sort-indicator {
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
+
+::deep th.user-name.col-sort-asc .col-header-content button.col-title .sort-indicator {
+    transform: translateX(26px) translateY(-1px) scaleY(-1);
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
+
+::deep th.user-name.col-sort-desc .col-header-content button.col-title .sort-indicator {
+    transform: translateX(26px) translateY(-1px);
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
+
+
+::deep th.second-column.col-sort-asc .col-header-content button.col-title .sort-indicator {
+    transform: translateX(12px) translateY(-1px) scaleY(-1);
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
+
+::deep th.second-column.col-sort-desc .col-header-content button.col-title .sort-indicator {
+    transform: translateX(12px) translateY(-1px);
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
+
+
+
+::deep th.first-column.col-sort-asc .col-header-content button.col-title .sort-indicator {
+    transform: translateX(26px) translateY(-1px) scaleY(-1);
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
+
+::deep th.first-column.col-sort-desc .col-header-content button.col-title .sort-indicator {
+    transform: translateX(26px);
+    background-image: url("/Images/arrow.svg");
+    background-position: center;
+}
 
 /* Subtle stripe effect */
 /*    ::deep tr:nth-child(even) {
@@ -99,7 +191,21 @@
     width: 25px;
 }
 
+::deep td.second-column {
+    padding-left: 16px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .15px;
+    width: 25px;
+}
+
 ::deep th.first-column {
+    padding-left: 16px;
+    font-weight: 700;
+    width: 25px;
+}
+
+::deep th.second-column {
     padding-left: 16px;
     font-weight: 700;
     width: 25px;
@@ -109,6 +215,10 @@
 
 @media (min-width: 985px) {
     ::deep td.first-column {
+        font-size: 16px;
+    }
+
+    ::deep td.second-column {
         font-size: 16px;
     }
 }
@@ -148,9 +258,13 @@
     .grid-controlers-header-left span {
         font-size: 1.65rem;
         cursor: pointer;
-        /* margin-top:.75px;*/
-        /*   font-weight: 500;*/
+        transition: color .25s ease-out;
     }
+
+        .grid-controlers-header-left span:hover {
+            color: var(--brand);
+            transition: color .25s ease-in;
+        }
 
     .grid-controlers-header-left button {
         /* default styles for the button*/
@@ -182,16 +296,16 @@ div .grid {
 }
 
 div.container {
-    max-height: calc(100vh - 112px);
-    height: calc(100vh - 112px);
-    /*max-height: 85%;*/
+    max-height: calc(100vh - 108px);
+    height: calc(100vh - 108px);
     border-radius: 8px;
-    width: 91%;
+    width: 94%;
     background: var(--plain-white);
     padding: .75rem 0 1rem 1rem;
     overflow-y: hidden;
     padding: 0px;
-    box-shadow: 0 0 2rem 0 rgba(136,152,170,.45);
+    box-shadow: 0px 2px 4px 0 rgba(220,220,220,.50);
+    border: 2px solid rgb(220, 220, 220);
 }
 
 @media (min-width: 1620px) {
@@ -282,11 +396,15 @@ div.container {
     transition: width 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
     border: 1px solid rgb(6 21 31 / .25); /* --brand-text in rgb values with opacity at 25%;*/
     /*   cursor: pointer;*/
+    position: relative;
+    overflow: hidden;
+    height: 33px;
 }
 
     .searchbox.using {
         width: 15rem;
         transition: width 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+        justify-content: flex-start;
     }
 
         .searchbox.using i {
@@ -296,7 +414,8 @@ div.container {
         }
 
         .searchbox.using input {
-            padding-left: 7.5px;
+            padding-left: 28px;
+            width: 13rem;
         }
 
 
@@ -304,24 +423,27 @@ div.container {
     .searchbox:focus-within {
         width: 15rem;
         transition: width 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+        justify-content: flex-start;
     }
 
 
+
     .searchbox input {
+        width: 15rem;
+        position: absolute;
         padding-left: 3rem;
     }
 
 
     .searchbox:focus-within input {
-        padding-left: 15px;
-        padding-left: 7.5px;
+        padding-left: 28px;
         display: inline-block;
     }
 
     .searchbox i {
-        margin-right: -49px;
         cursor: pointer;
         /* transition: margin-right 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;*/
+        /* margin-right: -49px;*/
     }
 
     .searchbox:focus-within i {
@@ -524,3 +646,4 @@ span.material-symbols-outlined {
 input.btn-check {
     height: 18px;
 }
+
