@@ -306,7 +306,7 @@
 
     public string FirstSixCharacters(string texto)
     {
-        if (texto.Length > 10)
+        if (texto is not null && texto.Length > 10)
         {
             return texto.Substring(0, 10);
         }
